@@ -1,0 +1,3 @@
+﻿tenant,property_address,city,state,lease_start_date,lease_end_date,base_rent_psf,rentable_sqft,lease_type,escalation_pct,risk_clauses
+Acme Corp,100 Commerce Blvd,Dallas,TX,2024-01-01,2029-12-31,32.50,12000,NNN,3.0,Co-tenancy;Go-Dark
+Beta LLC,200 Market St,Austin,TX,2023-06-01,2028-05-31,28.00,8500,Gross,2.5,Exclusive Use

@@ -1,0 +1,277 @@
+<?xml version="1.0"?>
+<!--
+  LeaseGuard CBRE Lease Ontology — OWL 2 DL
+  =========================================
+  Edit this file in Protégé (free: https://protege.stanford.edu)
+  This ontology governs the schema of all entities extracted from
+  commercial lease PDFs and stored in the Neo4j knowledge graph.
+
+  IRI: http://feuji.com/leaseguard/
+-->
+<rdf:RDF
+  xmlns        = "http://feuji.com/leaseguard#"
+  xmlns:owl    = "http://www.w3.org/2002/07/owl#"
+  xmlns:rdf    = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:rdfs   = "http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:xsd    = "http://www.w3.org/2001/XMLSchema#"
+  xmlns:dc     = "http://purl.org/dc/elements/1.1/"
+>
+
+  <owl:Ontology rdf:about="http://feuji.com/leaseguard">
+    <dc:title>CBRE Lease Knowledge Graph Ontology</dc:title>
+    <dc:description>
+      Ontology for commercial real estate lease entities used in the
+      LeaseGuard POC (CBRE reference use case).
+    </dc:description>
+    <dc:creator>Feuji AI Practice</dc:creator>
+    <owl:versionInfo>0.1.0</owl:versionInfo>
+  </owl:Ontology>
+
+  <!-- ════════════════════════════════════════════
+       CLASSES
+  ════════════════════════════════════════════ -->
+
+  <owl:Class rdf:about="#Property">
+    <rdfs:comment>
+      A physical commercial real estate asset — building, land parcel,
+      or mixed-use complex — managed or transacted by CBRE.
+    </rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Lease">
+    <rdfs:comment>
+      A contractual agreement granting a Tenant the right to occupy a
+      defined space within a Property for a specified period and financial
+      consideration.
+    </rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Tenant">
+    <rdfs:comment>
+      An organisation or individual that occupies commercial space under
+      a Lease agreement.
+    </rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Clause">
+    <rdfs:comment>
+      A specific provision within a Lease that carries legal or financial
+      significance — particularly termination rights, co-tenancy conditions,
+      exclusivity grants, and rights of first refusal.
+    </rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="#RenewalOption">
+    <rdfs:comment>
+      An option granted to the Tenant to extend the Lease Term for an
+      additional period under defined conditions.
+    </rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="#TerminationRight">
+    <rdfs:comment>
+      A Tenant's contractual right to terminate the Lease before the
+      natural expiration date, subject to notice and penalty conditions.
+    </rdfs:comment>
+  </owl:Class>
+
+  <owl:Class rdf:about="#RentSchedule">
+    <rdfs:comment>
+      A time-indexed schedule of Base Rent amounts, reflecting escalations
+      or step-ups over the Lease Term.
+    </rdfs:comment>
+  </owl:Class>
+
+  <!-- ════════════════════════════════════════════
+       OBJECT PROPERTIES (Relationships)
+  ════════════════════════════════════════════ -->
+
+  <owl:ObjectProperty rdf:about="#HAS_LEASE">
+    <rdfs:domain rdf:resource="#Property"/>
+    <rdfs:range  rdf:resource="#Lease"/>
+    <rdfs:comment>A Property may have one or more Leases.</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#SIGNED_BY">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="#Tenant"/>
+    <rdfs:comment>A Lease is signed by exactly one Tenant (canonical entity).</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#HAS_CLAUSE">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="#Clause"/>
+    <rdfs:comment>A Lease may contain zero or more risk Clauses.</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#HAS_OPTION">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="#RenewalOption"/>
+    <rdfs:comment>A Lease may grant zero or more RenewalOptions to the Tenant.</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#HAS_TERM_RIGHT">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="#TerminationRight"/>
+    <rdfs:comment>A Lease may include zero or more TerminationRights.</rdfs:comment>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#HAS_RENT_SCHEDULE">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="#RentSchedule"/>
+  </owl:ObjectProperty>
+
+  <!-- ════════════════════════════════════════════
+       DATA PROPERTIES — Property
+  ════════════════════════════════════════════ -->
+
+  <owl:DatatypeProperty rdf:about="#address">
+    <rdfs:domain rdf:resource="#Property"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>Full street address — canonical (normalised) form.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#city">
+    <rdfs:domain rdf:resource="#Property"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#state">
+    <rdfs:domain rdf:resource="#Property"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>2-letter US state code.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#sqft">
+    <rdfs:domain rdf:resource="#Property"/>
+    <rdfs:range  rdf:resource="xsd:integer"/>
+    <rdfs:comment>Total building gross square footage.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#property_class">
+    <rdfs:domain rdf:resource="#Property"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>Class A | Class B | Class C</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- ════════════════════════════════════════════
+       DATA PROPERTIES — Lease
+  ════════════════════════════════════════════ -->
+
+  <owl:DatatypeProperty rdf:about="#lease_id">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>Internal LeaseGuard identifier, e.g. LG-A3F9B2.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#start_date">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#end_date">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:date"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#base_rent_psf">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:decimal"/>
+    <rdfs:comment>Base rent in US dollars per rentable square foot per annum.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#rentable_sqft">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:integer"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#annual_rent">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:decimal"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#lease_type">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>NNN | Gross | Modified Gross | Ground Lease | other</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#escalation_pct">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:decimal"/>
+    <rdfs:comment>Annual rent escalation percentage.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#source_file">
+    <rdfs:domain rdf:resource="#Lease"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>Original PDF filename from which this Lease was extracted.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- ════════════════════════════════════════════
+       DATA PROPERTIES — Tenant
+  ════════════════════════════════════════════ -->
+
+  <owl:DatatypeProperty rdf:about="#tenant_name">
+    <rdfs:domain rdf:resource="#Tenant"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>Canonical tenant name (legal suffixes stripped, title-cased).</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#industry">
+    <rdfs:domain rdf:resource="#Tenant"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
+
+  <!-- ════════════════════════════════════════════
+       DATA PROPERTIES — Clause
+  ════════════════════════════════════════════ -->
+
+  <owl:DatatypeProperty rdf:about="#clause_text">
+    <rdfs:domain rdf:resource="#Clause"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#risk_level">
+    <rdfs:domain rdf:resource="#Clause"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>HIGH | MEDIUM | LOW</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- ════════════════════════════════════════════
+       DATA PROPERTIES — RenewalOption
+  ════════════════════════════════════════════ -->
+
+  <owl:DatatypeProperty rdf:about="#term_years">
+    <rdfs:domain rdf:resource="#RenewalOption"/>
+    <rdfs:range  rdf:resource="xsd:integer"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#notice_months">
+    <rdfs:range  rdf:resource="xsd:integer"/>
+    <rdfs:comment>Months of written notice required before exercising the option.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#rent_basis">
+    <rdfs:domain rdf:resource="#RenewalOption"/>
+    <rdfs:range  rdf:resource="xsd:string"/>
+    <rdfs:comment>FMR (Fair Market Rent) | fixed | other</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <!-- ════════════════════════════════════════════
+       DATA PROPERTIES — TerminationRight
+  ════════════════════════════════════════════ -->
+
+  <owl:DatatypeProperty rdf:about="#effective_after_year">
+    <rdfs:domain rdf:resource="#TerminationRight"/>
+    <rdfs:range  rdf:resource="xsd:integer"/>
+    <rdfs:comment>The Lease year after which the Tenant may exercise this right.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#penalty_months">
+    <rdfs:domain rdf:resource="#TerminationRight"/>
+    <rdfs:range  rdf:resource="xsd:integer"/>
+    <rdfs:comment>Number of months of base rent payable as a termination fee.</rdfs:comment>
+  </owl:DatatypeProperty>
+
+</rdf:RDF>

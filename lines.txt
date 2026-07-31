@@ -1,0 +1,28 @@
+Hero Actions: Lines 1804 to 1807
+1804:           <div class="hero-actions">
+1805:             <button class="btn btn-primary" onclick="nav('ingest')">▶ Start Demo: Ingest a Document</button>
+1806:             <button class="btn btn-ghost" onclick="nav('ask')">💬 Jump to Ask AI</button>
+1807:           </div>
+
+Eval View: Line 2280
+2280:       <div class="view" id="view-eval">
+2281:         <div class="page-head">
+2282:           <div class="eyebrow">⑥ SYSTEM EVALUATION</div>
+2283:           <div class="page-title">RAGAS & Performance Metrics</div>
+2284:           <div class="page-sub">Pre-computed benchmark scores evaluating Graph-RAG retrieval accuracy and Text-to-Cypher translation via the RAGAS framework.</div>
+2285:         </div>
+2286: 
+2287:         <div class="grid-2" style="margin-bottom:18px">
+2288:           <!-- RAGAS Metrics Card -->
+2289:           <div class="card">
+
+Topnav: Lines 1742 to 1750
+1742:     <div class="topnav" id="topnav">
+1743:       <button data-view="overview" class="active"><span class="dot"></span>Overview</button>
+1744:       <button data-view="ingest"><span class="dot"></span>Ingest</button>
+1745:       <button data-view="ask"><span class="dot"></span>Ask AI</button>
+1746:       <button data-view="risk"><span class="dot"></span>Risk Dashboard</button>
+1747:       <button data-view="graph"><span class="dot"></span>Knowledge Graph</button>
+1748:       <button data-view="arch"><span class="dot"></span>Architecture</button>
+1749:       <button data-view="eval"><span class="dot"></span>Evaluation</button>
+1750:     </div>

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "leaseguard"
+version = "0.1.0"
+description = "Knowledge Graph–Powered Lease Intelligence POC — CBRE Domain"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Feuji AI Practice"}]
+keywords = ["knowledge-graph", "neo4j", "lease", "real-estate", "llm", "rag"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["leaseguard*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-v --tb=short"
+
+[tool.coverage.run]
+source = ["leaseguard"]
+omit = ["tests/*", "*/migrations/*"]
