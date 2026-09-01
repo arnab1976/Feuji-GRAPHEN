@@ -22,10 +22,10 @@
             return 'http://127.0.0.1:8000' + path.replace(/^http:\/\/[^\/]+/, '');
         }
         const cleanPath = path.startsWith('/') ? path : '/' + path;
-        if (window.location.protocol !== 'file:' && window.location.hostname === '127.0.0.1' && window.location.port === '8000') {
+        if (window.location.protocol !== 'file:' && window.location.hostname === '127.0.0.1' && window.location.port) {
             return cleanPath;
         }
-        return 'http://127.0.0.1:8000' + cleanPath;
+        return 'http://127.0.0.1:8011' + cleanPath;
     };
 
 
