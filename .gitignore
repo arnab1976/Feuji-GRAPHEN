@@ -44,3 +44,5 @@ logs/
 
 # Data / Generated PDF samples
 data/sample_leases/
+data/chroma_db/
+data/next_ai_chroma/

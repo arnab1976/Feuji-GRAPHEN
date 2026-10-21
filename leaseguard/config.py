@@ -30,7 +30,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_MODEL   = os.getenv("GEMINI_MODEL",   "gemini-1.5-flash")
 
 OPENAI_API_KEY  = os.getenv("OPENAI_API_KEY",  "")
-OPENAI_MODEL    = os.getenv("OPENAI_MODEL",    "gpt-4o-mini")
+OPENAI_MODEL    = os.getenv("OPENAI_MODEL", os.getenv("LLM_MODEL", "gpt-4o"))
 OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL", "")  # optional (Azure / proxy)
 
 LLM_TEMPERATURE  = float(os.getenv("LLM_TEMPERATURE", "0.0"))

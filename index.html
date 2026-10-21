@@ -13,19 +13,36 @@
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <script>
+        window.showArchTab = function(tabName) {
+      const tabs = ['pipeline', 'fintech', 'health', 'breakdown', 'techstack'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('archTab-' + t);
+        const content = document.getElementById('archContent-' + t);
+        if (btn) {
+          if (t === tabName) {
+            btn.className = 'btn btn-sm btn-primary';
+          } else {
+            btn.className = 'btn btn-sm btn-secondary';
+          }
+        }
+        if (content) {
+          content.style.display = (t === tabName) ? 'block' : 'none';
+        }
+      });
+    };
 
-    window.getApiUrl = function(path) {
+
+        window.getApiUrl = function(path) {
         if (!path) return '';
         if (typeof path !== 'string') return path;
-        if (path.startsWith('http://127.0.0.1:8000')) return path;
-        if (path.startsWith('http://localhost:8010') || path.startsWith('http://localhost:8000') || path.startsWith('http://127.0.0.1:8010')) {
-            return 'http://127.0.0.1:8000' + path.replace(/^http:\/\/[^\/]+/, '');
+        if (/^http:\/\/(localhost|127\.0\.0\.1):(8000|8004|8010|8011)/i.test(path)) {
+            path = path.replace(/^http:\/\/[^\/]+/, '');
         }
         const cleanPath = path.startsWith('/') ? path : '/' + path;
-        if (window.location.protocol !== 'file:' && window.location.hostname === '127.0.0.1' && window.location.port) {
+        if (window.location.protocol !== 'file:') {
             return cleanPath;
         }
-        return 'http://127.0.0.1:8011' + cleanPath;
+        return 'http://127.0.0.1:8004' + cleanPath;
     };
 
 
@@ -4300,6 +4317,89 @@
     }
     .btn-nav-jump { font-size: 13px; }
   </style>
+<style>
+    .arch-flowchart-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0 30px;
+      width: 100%;
+      max-width: 820px;
+    }
+    .arch-stage-box {
+      border: 1.5px solid var(--line-strong, #3A4763);
+      border-radius: 10px;
+      background: var(--surface, #1A2234);
+      padding: 14px 18px;
+      width: 100%;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+    }
+    .arch-stage-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--tx-0, #FFFFFF);
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--line-soft, #2A364F);
+      letter-spacing: 0.02em;
+    }
+    .arch-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .arch-sub-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+    }
+    .arch-sub-box {
+      border: 1px solid var(--line, #2E3B54);
+      border-radius: 6px;
+      background: var(--bg-2, #121824);
+      padding: 10px 14px;
+      text-align: center;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--tx-1, #E2E8F0);
+      width: 100%;
+    }
+    .arch-sub-box.amber {
+      border-color: rgba(255, 159, 10, 0.45);
+      background: rgba(255, 159, 10, 0.07);
+      color: var(--amber, #FF9F0A);
+    }
+    .arch-sub-box.emerald {
+      border-color: rgba(61, 220, 151, 0.45);
+      background: rgba(61, 220, 151, 0.07);
+      color: var(--emerald, #3DDC97);
+    }
+    .arch-sub-box.blue {
+      border-color: rgba(96, 165, 250, 0.45);
+      background: rgba(96, 165, 250, 0.07);
+      color: #60A5FA;
+    }
+    .arch-sub-note {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--tx-2, #94A3B8);
+      margin-top: 3px;
+    }
+    .arch-arrow-down {
+      font-size: 18px;
+      color: var(--amber, #FF9F0A);
+      font-weight: 700;
+      margin: -2px 0;
+    }
+    .arch-arrow-inner {
+      font-size: 14px;
+      color: var(--tx-3, #64748B);
+      margin: -4px 0;
+    }</style>
 </head>
 
 <body>
@@ -4445,6 +4545,17 @@
             <span class="nav-text">
               <span class="nav-title">Control Tower</span>
               <span class="nav-sub">Admin · platform controls</span>
+            </span>
+          </button>
+        </div>
+        
+        <div class="nav-group nav-group-util" id="navGroupAppendix">
+          <div class="side-label" style="color:var(--amber,#FF9F0A); font-weight:700; font-size:11px; letter-spacing:0.08em;">APPENDIX</div>
+          <button type="button" class="nav-card" data-view="arch">
+            <span class="nav-ico">🏛️</span>
+            <span class="nav-text">
+              <span class="nav-title">Solution Architecture</span>
+              <span class="nav-sub">End-to-end KG design & 2 Use Cases</span>
             </span>
           </button>
         </div>
@@ -5019,82 +5130,580 @@
       </div>
 
       <!-- ============ ARCHITECTURE ============ -->
+            <!-- ============ SOLUTION ARCHITECTURE & TECHNICAL BLUEPRINT ============ -->
+            <!-- ============ SOLUTION ARCHITECTURE & TECHNICAL BLUEPRINT ============ -->
+            <!-- ============ SOLUTION ARCHITECTURE & TECHNICAL BLUEPRINT ============ -->
+            <!-- ============ SOLUTION ARCHITECTURE & TECHNICAL BLUEPRINT ============ -->
       <div class="view" id="view-arch">
         <div class="page-head">
-          <div class="eyebrow">⑤ HOW IT'S BUILT</div>
-          <div class="page-title">System Architecture — 100% Free Stack</div>
-          <div class="page-sub">Five layers, every component open-source or free-tier. No paid database, no paid vector
-            store, no required paid LLM.</div>
+          <div class="eyebrow">APPENDIX · TECHNICAL BLUEPRINT & SOLUTION ARCHITECTURE</div>
+          <div class="page-title">Knowledge Graph Solution Architecture</div>
+          <div class="page-sub">Comprehensive architectural specification with 5 embedded technical mechanics: inter-unstructured document mapping, key binding engine, property graph data structure, Cypher pattern recognition, and concrete executive deliverables.</div>
         </div>
 
-        <div class="layer-row">
-          <div class="layer-badge" style="background:#4C8DFF">L5</div>
-          <div class="layer-line">
-            <div class="layer-name">Application Layer</div>
-            <div class="layer-desc">Streamlit UI · FastAPI REST · this demo portal</div>
+        <!-- Section Navigation Pills -->
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px;">
+          <button type="button" onclick="showArchTab('pipeline')" id="archTab-pipeline" class="btn btn-sm btn-primary" style="padding:8px 16px; font-weight:600;">📌 10-Step Master Pipeline Diagram</button>
+          <button type="button" onclick="showArchTab('fintech')" id="archTab-fintech" class="btn btn-sm btn-secondary" style="padding:8px 16px; font-weight:600;">💳 Financial Services — AML Diagram & Outputs</button>
+          <button type="button" onclick="showArchTab('health')" id="archTab-health" class="btn btn-sm btn-secondary" style="padding:8px 16px; font-weight:600;">🧬 Healthcare — Drug Discovery Diagram & Outputs</button>
+          <button type="button" onclick="showArchTab('breakdown')" id="archTab-breakdown" class="btn btn-sm btn-secondary" style="padding:8px 16px; font-weight:600;">🔍 5-Step Technical Mechanics Flowchart & Text</button>
+          <button type="button" onclick="showArchTab('techstack')" id="archTab-techstack" class="btn btn-sm btn-secondary" style="padding:8px 16px; font-weight:600;">⚙️ Neo4j, Protégé OWL & Cypher Roles</button>
+        </div>
+
+        <!-- TAB 1: 10-STEP PIPELINE BLUEPRINT & MASTER EMBEDDED DIAGRAM -->
+        <div id="archContent-pipeline" class="arch-tab-content">
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+            <h3 style="color:var(--tx-0); font-size:18px; margin-top:0; margin-bottom:8px; font-weight:700;">🌐 Diagram 1: Master Architecture with Embedded 5-Step Mechanics</h3>
+            <p style="color:var(--tx-2); font-size:13px; line-height:1.5; margin-bottom:20px;">
+              Master architectural flow showing multi-source ingestion, ingestion pipelines, key binding, Neo4j graph storage, Cypher pattern recognition, and executive deliverables with the 5 core mechanics embedded into each stage.
+            </p>
+
+            <!-- DIAGRAM 1 FLOWCHART WITH EMBEDDED MECHANICS -->
+            <div style="display:flex; justify-content:center;">
+              <div class="arch-flowchart-container">
+                
+                <!-- Stage 1 & 2: Ingestion & Pipelines + Mechanic 1 Embedded -->
+                <div class="arch-stage-box">
+                  <div class="arch-stage-title">1. Multi-Source Ingestion & Pipelines <span style="float:right; color:var(--amber); font-size:11px; font-weight:600;">[Mechanic 1 Embedded: Inter-Unstructured Mapping]</span></div>
+                  <div class="arch-sub-grid">
+                    <div class="arch-sub-box">Structured CSV / SQL Feeds<span class="arch-sub-note">(Transactions, Assays, KYC)</span></div>
+                    <div class="arch-sub-box">Unstructured PDF / Word Docs<span class="arch-sub-note">(SAR Narratives, Protocols, Papers)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--amber);">Mechanic 1 (Document-to-Document Mapping):</strong> Co-occurrence entity bridges <code style="color:var(--mono);">(Doc1)-[:MENTIONS]->(Entity)<-[:MENTIONS]-(Doc2)</code>, Citation reference parsing (PMID/NCT), ChromaDB vector similarity ($>0.82$ Cosine), and cross-document coreference resolution.
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Stage 3 + Mechanic 2 Embedded -->
+                <div class="arch-stage-box">
+                  <div class="arch-stage-title">2. Unification & Key Binding Engine <span style="float:right; color:var(--amber); font-size:11px; font-weight:600;">[Mechanic 2 Embedded: Key Binding]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box amber">Canonical Business Mapping Keys<span class="arch-sub-note">(Tax_ID, IBAN, UniProt_ID, SMILES, NCT_ID)</span></div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box">Entity Resolution & Binding Script<span class="arch-sub-note">Executing Cypher: MERGE (Chunk)-[:EVIDENCE_FOR]->(StructuredEntity)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--amber);">Mechanic 2 (Structured Key Binding):</strong> Parses canonical keys via regex + LLM JSON Schema, then anchors unstructured text chunks directly to primary relational record nodes in Neo4j.
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Stage 4 Part A + Mechanic 3 Embedded -->
+                <div class="arch-stage-box">
+                  <div class="arch-stage-title">3. Neo4j Property Graph Storage <span style="float:right; color:#60A5FA; font-size:11px; font-weight:600;">[Mechanic 3 Embedded: Graph Data Structure]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box">Protégé OWL 2 Ontology Governance Schema</div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box blue">Multi-Modal Property Graph Data Structure<span class="arch-sub-note">(Domain Nodes + Document Nodes + Attributes + Relationships + Provenance Metadata)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:#60A5FA;">Mechanic 3 (Ultimate Data Structure):</strong> Property graph unifying domain nodes (Customer/Compound) and document nodes (Chunk) with attributes (<code style="color:var(--mono);">ic50_nm</code>, <code style="color:var(--mono);">amount_usd</code>) and full source provenance.
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Stage 4 Part B + Mechanic 4 Embedded -->
+                <div class="arch-stage-box">
+                  <div class="arch-stage-title">4. Pattern Recognition Engine <span style="float:right; color:var(--amber); font-size:11px; font-weight:600;">[Mechanic 4 Embedded: Graph Pattern Recognition]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box amber">Cypher Pattern Recognition Engine<span class="arch-sub-note">(Topology Motif Matching, N-Hop Cycle Traversal, PageRank Centrality & Louvain Communities)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--amber);">Mechanic 4 (Pattern Recognition):</strong> Replaces black-box ML with explicit Cypher graph motif queries, N-hop cycle detection, PageRank entity centrality, and Louvain community clustering.
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Stage 5 + Mechanic 5 Embedded -->
+                <div class="arch-stage-box">
+                  <div class="arch-stage-title">5. Hybrid Graph-RAG & Leadership Output <span style="float:right; color:var(--emerald); font-size:11px; font-weight:600;">[Mechanic 5 Embedded: Executive Outputs]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box">Hybrid Graph-RAG Q&A Engine</div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box emerald">Concrete Executive Leadership Deliverables<span class="arch-sub-note">(Quantified Dollar Laundering Exposure, Suspect List, Discovered Lead Drug & Affinity Recipe)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--emerald);">Mechanic 5 (Leadership Deliverables):</strong> Delivers precise, actionable outputs: exact dollar laundering exposure ($14.25M), suspect accounts, validated lead drug candidates (Gefitinib IC50=2.3nM), and binding recipes.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
           </div>
         </div>
-        <div class="layer-row">
-          <div class="layer-badge" style="background:#F5A623">L4</div>
-          <div class="layer-line">
-            <div class="layer-name">Intelligence Layer (Graph-RAG)</div>
-            <div class="layer-desc">sentence-transformers embeddings · ChromaDB vector search · LLM answer synthesis
+
+        <!-- TAB 2: FINANCIAL SERVICES AML & FRAUD RISK -->
+        <div id="archContent-fintech" class="arch-tab-content" style="display:none;">
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+            
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <div>
+                <span style="background:rgba(255,159,10,0.15); color:var(--amber); font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; text-transform:uppercase;">Financial Services Industry Blueprint</span>
+                <h3 style="color:var(--tx-0); font-size:20px; margin:8px 0 0; font-weight:700;">Diagram 2: Financial AML Architecture with Embedded Mechanics</h3>
+              </div>
+              <span style="font-size:32px;">💳</span>
+            </div>
+
+            <p style="color:var(--tx-2); font-size:13px; line-height:1.5; margin-bottom:20px;">
+              Customized architectural flow specifying core banking SQL, SWIFT wires, OFAC sanctions, SAR narratives, financial entity resolution, and AML layering ring detection with the 5 mechanics embedded into every stage.
+            </p>
+
+            <!-- DIAGRAM 2 FLOWCHART (FINANCIAL CUSTOMIZED WITH EMBEDDED MECHANICS) -->
+            <div style="display:flex; justify-content:center;">
+              <div class="arch-flowchart-container">
+                
+                <!-- Stage 1 & 2 + Mechanic 1 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">1. Financial Data Ingestion & Pipelines <span style="float:right; color:var(--amber); font-size:11px; font-weight:600;">[Mechanic 1: Financial Document Mapping]</span></div>
+                  <div class="arch-sub-grid">
+                    <div class="arch-sub-box">Structured Banking Feeds<span class="arch-sub-note">(Core Banking SQL, SWIFT Wires, KYC, OFAC Sanctions)</span></div>
+                    <div class="arch-sub-box">Unstructured Compliance Docs<span class="arch-sub-note">(Loan Application PDFs, SAR Narratives, Emails)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--amber);">Mechanic 1 (Financial Document Mapping):</strong> Links SAR Narratives to Loan Applications via co-occurrence customer bridges, SAR case reference citations (<code style="color:var(--mono);">SAR-2026-09</code>), and ChromaDB compliance vector similarity.
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Stage 3 + Mechanic 2 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">2. Financial Unification & Key Binding <span style="float:right; color:var(--amber); font-size:11px; font-weight:600;">[Mechanic 2: Financial Key Binding]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box amber">Canonical Financial Mapping Keys<span class="arch-sub-note">(Customer_TaxID, Account_IBAN, LEI_Code, Device_ID)</span></div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box">Financial Entity Resolution Script<span class="arch-sub-note">Executing Cypher: MERGE (Chunk)-[:EVIDENCE_FOR]->(Account)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--amber);">Mechanic 2 (Financial Key Binding):</strong> Extracts <code style="color:var(--emerald);">Customer_TaxID</code> and <code style="color:var(--emerald);">Account_IBAN</code> from unstructured SAR narratives to anchor document text directly to SQL account nodes.
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Stage 4 Part A + Mechanic 3 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">3. Neo4j AML Property Graph Storage <span style="float:right; color:#60A5FA; font-size:11px; font-weight:600;">[Mechanic 3: AML Property Graph Structure]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box">Financial Services OWL 2 Ontology Schema</div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box blue">AML Multi-Modal Property Graph Data Structure<span class="arch-sub-note">(Nodes: Customer/Account/Device/Chunk, Edges: OWNS/TRANSFERRED/MENTIONS)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:#60A5FA;">Mechanic 3 (AML Data Structure):</strong> Graph topology uniting customer accounts, SWIFT wire transaction amounts (<code style="color:var(--mono);">amount_usd</code>), timestamps, and SAR chunk source provenance.
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Stage 4 Part B + Mechanic 4 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">4. AML Pattern Recognition Engine <span style="float:right; color:var(--amber); font-size:11px; font-weight:600;">[Mechanic 4: Wire Ring Recognition]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box amber">Cypher AML Pattern Recognition Engine<span class="arch-sub-note">(3-6 Hop Circular Wire Layering Rings, Shared Device Fraud Hubs, PageRank Centrality)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--amber);">Mechanic 4 (AML Pattern Recognition):</strong> Executes declarative Cypher queries searching for N-hop circular wire paths <code style="color:var(--mono);">(acc)-[:TRANSFERRED*3..6]->(acc)</code> and PageRank ringleaders.
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Stage 5 + Mechanic 5 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">5. AML Graph-RAG & Executive Output <span style="float:right; color:var(--emerald); font-size:11px; font-weight:600;">[Mechanic 5: AML Leadership Outputs]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box">Hybrid Financial Graph-RAG Q&A Engine</div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box emerald">Concrete Executive Leadership AML Deliverables<span class="arch-sub-note">($14.25M Laundering Exposure, Identified Suspects & Shell Co, 1-Click SAR Package)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--emerald);">Mechanic 5 (AML Deliverables):</strong> Delivers exact dollar laundering exposure ($14.25M across 3 rings), suspect entities (`Acme Shell LLC`, `John Doe`, `IP 192.168.1.50`), and automated FinCEN SAR filing packages.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- PRECISE FINANCIAL EXECUTIVE DELIVERABLE BOX -->
+            <div style="background:var(--bg-2); border:1px solid var(--line-soft); border-radius:10px; padding:20px; margin-top:20px;">
+              <h4 style="color:var(--amber); margin-top:0; font-size:15px; font-weight:700;">🎯 Concrete Executive Leadership Output — Financial AML & Fraud</h4>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:12px;">
+                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px;">
+                  <div style="color:var(--amber); font-size:11px; font-weight:700;">QUANTIFIED MONEY LAUNDERING EXPOSURE</div>
+                  <div style="font-size:22px; font-weight:700; color:var(--rose); margin:4px 0;">$14,250,000.00</div>
+                  <p style="color:var(--tx-2); font-size:11.5px; margin:0;">Identified across 3 active circular wire layering rings spanning 14 accounts and 4 jurisdictions.</p>
+                </div>
+                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px;">
+                  <div style="color:var(--amber); font-size:11px; font-weight:700;">ENGAGED BAD ACTORS & SHELL COS</div>
+                  <div style="font-size:13px; font-weight:700; color:var(--tx-0); margin:4px 0;">Acme Shell LLC · John Doe · IP 192.168.1.50</div>
+                  <p style="color:var(--tx-2); font-size:11.5px; margin:0;">Connected via shared device fingerprint (MAC: 00-14-22) and common beneficial ownership agreements.</p>
+                </div>
+                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px;">
+                  <div style="color:var(--amber); font-size:11px; font-weight:700;">REGULATORY DELIVERABLE</div>
+                  <div style="font-size:13px; font-weight:700; color:var(--emerald); margin:4px 0;">Automated 1-Click SAR Filing Package</div>
+                  <p style="color:var(--tx-2); font-size:11.5px; margin:0;">Pre-populated FinCEN Suspicious Activity Report complete with full graph evidence audit trail.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB 3: HEALTHCARE & LIFE SCIENCES DRUG DISCOVERY -->
+        <div id="archContent-health" class="arch-tab-content" style="display:none;">
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+            
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+              <div>
+                <span style="background:rgba(61,220,151,0.15); color:var(--emerald); font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; text-transform:uppercase;">Healthcare & Life Sciences Industry Blueprint</span>
+                <h3 style="color:var(--tx-0); font-size:20px; margin:8px 0 0; font-weight:700;">Diagram 3: Drug Discovery Architecture with Embedded Mechanics</h3>
+              </div>
+              <span style="font-size:32px;">🧬</span>
+            </div>
+
+            <p style="color:var(--tx-2); font-size:13px; line-height:1.5; margin-bottom:20px;">
+              Customized architectural flow specifying ChEMBL bioassays, UniProtKB protein targets, PubChem SMILES structures, PubMed preprints, bio-entity resolution, and nanomolar affinity path discovery with the 5 mechanics embedded into every stage.
+            </p>
+
+            <!-- DIAGRAM 3 FLOWCHART (HEALTHCARE CUSTOMIZED WITH EMBEDDED MECHANICS) -->
+            <div style="display:flex; justify-content:center;">
+              <div class="arch-flowchart-container">
+                
+                <!-- Stage 1 & 2 + Mechanic 1 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(61,220,151,0.5);">
+                  <div class="arch-stage-title" style="color:var(--emerald);">1. Bio Data Ingestion & Pipelines <span style="float:right; color:var(--emerald); font-size:11px; font-weight:600;">[Mechanic 1: Bio Literature Mapping]</span></div>
+                  <div class="arch-sub-grid">
+                    <div class="arch-sub-box">Structured Life Sciences Feeds<span class="arch-sub-note">(ChEMBL Bioassays, UniProtKB, PubChem, ClinicalTrials)</span></div>
+                    <div class="arch-sub-box">Unstructured Scientific Literature<span class="arch-sub-note">(PubMed Papers, bioRxiv Preprints, Patent PDFs, Protocols)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--emerald);">Mechanic 1 (Bio Literature Mapping):</strong> Links PubMed papers to bioRxiv preprints via PubMed citations (<code style="color:var(--mono);">PMID:3829102</code>), target gene co-occurrences (<code style="color:var(--mono);">EGFR L858R</code>), and ChromaDB vector similarity.
+                  </div>
+                </div>
+                <div class="arch-arrow-down" style="color:var(--emerald);">↓</div>
+
+                <!-- Stage 3 + Mechanic 2 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(61,220,151,0.5);">
+                  <div class="arch-stage-title" style="color:var(--emerald);">2. Bio Unification & Key Binding <span style="float:right; color:var(--emerald); font-size:11px; font-weight:600;">[Mechanic 2: Bio Key Binding]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box emerald">Canonical Life Sciences Mapping Keys<span class="arch-sub-note">(UniProt_ID, InChIKey/SMILES, NCBI_Gene_ID, NCT_ID)</span></div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box">Bio Entity Resolution Script<span class="arch-sub-note">Executing Cypher: MERGE (Chunk)-[:EVIDENCE_FOR]->(TargetProtein)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--emerald);">Mechanic 2 (Bio Key Binding):</strong> Extracts <code style="color:var(--emerald);">UniProt_Accession</code> and <code style="color:var(--emerald);">InChIKey</code> from literature chunks to anchor paper text directly to ChEMBL compound nodes in Neo4j.
+                  </div>
+                </div>
+                <div class="arch-arrow-down" style="color:var(--emerald);">↓</div>
+
+                <!-- Stage 4 Part A + Mechanic 3 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(61,220,151,0.5);">
+                  <div class="arch-stage-title" style="color:var(--emerald);">3. Neo4j Bio Property Graph Storage <span style="float:right; color:#60A5FA; font-size:11px; font-weight:600;">[Mechanic 3: Bio Property Graph Structure]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box">Life Sciences OWL 2 Ontology Schema</div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box blue">Bio Multi-Modal Property Graph Data Structure<span class="arch-sub-note">(Nodes: Compound/Target/Pathway/Disease, Edges: BINDS_TO/PATHWAY)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:#60A5FA;">Mechanic 3 (Bio Data Structure):</strong> Graph topology uniting compounds, binding affinities (<code style="color:var(--mono);">ic50_nm: 2.3</code>), pathways (<code style="color:var(--mono);">ErbB</code>), and PubMed literature chunk source provenance.
+                  </div>
+                </div>
+                <div class="arch-arrow-down" style="color:var(--emerald);">↓</div>
+
+                <!-- Stage 4 Part B + Mechanic 4 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(61,220,151,0.5);">
+                  <div class="arch-stage-title" style="color:var(--emerald);">4. Bio Cypher Pattern Recognition Engine <span style="float:right; color:var(--emerald); font-size:11px; font-weight:600;">[Mechanic 4: Affinity Path Recognition]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box emerald">Cypher Drug Discovery Pattern Engine<span class="arch-sub-note">(Nanomolar Affinity Paths IC50<50nM, Off-Target Toxicity Scans, Pathway Validation)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--emerald);">Mechanic 4 (Bio Pattern Recognition):</strong> Executes Cypher queries traversing <code style="color:var(--mono);">(Compound)-[:BINDS_TO]->(TargetProtein)-[:PATHWAY]->(Disease)</code> to discover high-affinity leads and off-target HER2 toxicity risks.
+                  </div>
+                </div>
+                <div class="arch-arrow-down" style="color:var(--emerald);">↓</div>
+
+                <!-- Stage 5 + Mechanic 5 Embedded -->
+                <div class="arch-stage-box" style="border-color:rgba(61,220,151,0.5);">
+                  <div class="arch-stage-title" style="color:var(--emerald);">5. Bio Graph-RAG & Leadership Output <span style="float:right; color:var(--emerald); font-size:11px; font-weight:600;">[Mechanic 5: Bio Leadership Outputs]</span></div>
+                  <div class="arch-sub-stack">
+                    <div class="arch-sub-box">Hybrid Bio Graph-RAG Q&A Engine</div>
+                    <div class="arch-arrow-inner">↓</div>
+                    <div class="arch-sub-box emerald">Concrete Executive Leadership Bio Deliverables<span class="arch-sub-note">(Lead Candidate Gefitinib/LG-772, IC50=2.3nM, Active Site Interaction Recipe)</span></div>
+                  </div>
+                  <div style="margin-top:10px; padding:8px 12px; background:var(--bg-2); border:1px dashed var(--line-soft); border-radius:6px; font-size:11.5px; color:var(--tx-2);">
+                    <strong style="color:var(--emerald);">Mechanic 5 (Bio Deliverables):</strong> Delivers validated lead drug candidates (Gefitinib / LG-772, IC50=2.3nM), chemical active site binding recipes (Quinazoline core + Met793 hinge), and off-target HER2 toxicity heatmaps.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- PRECISE BIOMEDICAL EXECUTIVE DELIVERABLE BOX -->
+            <div style="background:var(--bg-2); border:1px solid var(--line-soft); border-radius:10px; padding:20px; margin-top:20px;">
+              <h4 style="color:var(--emerald); margin-top:0; font-size:15px; font-weight:700;">🎯 Concrete Executive Leadership Output — Drug Discovery & Biomarkers</h4>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; margin-top:12px;">
+                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px;">
+                  <div style="color:var(--emerald); font-size:11px; font-weight:700;">DISCOVERED LEAD DRUG CANDIDATE</div>
+                  <div style="font-size:18px; font-weight:700; color:var(--emerald); margin:4px 0;">Gefitinib / LG-772</div>
+                  <p style="color:var(--tx-2); font-size:11.5px; margin:0;">Validated targeting <strong>EGFR L858R Mutation</strong> for Non-Small Cell Lung Cancer with nanomolar binding affinity <strong>IC50 = 2.3 nM</strong>.</p>
+                </div>
+                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px;">
+                  <div style="color:var(--emerald); font-size:11px; font-weight:700;">CHEMICAL INGREDIENT & RECIPE SYNTHESIS</div>
+                  <div style="font-size:13px; font-weight:700; color:var(--tx-0); margin:4px 0;">Quinazoline Core + 3-Chloro-4-Fluoroaniline</div>
+                  <p style="color:var(--tx-2); font-size:11.5px; margin:0;">Interacts with ATP binding pocket hinge region (Lys745 / Met793) to inhibit ErbB signaling cascade.</p>
+                </div>
+                <div style="background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:14px;">
+                  <div style="color:var(--emerald); font-size:11px; font-weight:700;">OFF-TARGET TOXICITY WARNING</div>
+                  <div style="font-size:13px; font-weight:700; color:var(--amber); margin:4px 0;">Low Risk · HER2 Cross-Binding Flag</div>
+                  <p style="color:var(--tx-2); font-size:11.5px; margin:0;">Graph traversal revealed minor affinity to HER2 (IC50 = 120 nM), manageable in Phase I trial protocol.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- TAB 4: 5-STEP TECHNICAL MECHANICS FLOWCHART & TEXT -->
+        <div id="archContent-breakdown" class="arch-tab-content" style="display:none;">
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+            
+            <h3 style="color:var(--tx-0); font-size:18px; margin-top:0; margin-bottom:8px; font-weight:700;">🔍 Diagram 4: 5-Step Deep-Dive Technical Mechanics Flowchart</h3>
+            <p style="color:var(--tx-2); font-size:13px; line-height:1.5; margin-bottom:20px;">
+              Visual flowchart representation showing how unstructured documents map together, bind to structured composite data via mapping keys, build the ultimate property graph data structure, execute pattern recognition, and produce concrete executive leadership deliverables.
+            </p>
+
+            <!-- DEDICATED DIAGRAM 4 FLOWCHART FOR MECHANICS TAB -->
+            <div style="display:flex; justify-content:center; margin-bottom:24px;">
+              <div class="arch-flowchart-container">
+                
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">Mechanic 1: Inter-Unstructured Document Mapping</div>
+                  <div class="arch-sub-box">Co-occurrence Entity Bridges + Citation Extraction (PMID/NCT) + ChromaDB Vector Similarity (&gt;0.82) + Coreference Resolution</div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">Mechanic 2: Unstructured-to-Structured Mapping Key Binding</div>
+                  <div class="arch-sub-box amber">Canonical Keys (Tax_ID, IBAN, UniProt_ID, SMILES, NCT_ID) &rarr; Cypher MERGE (Chunk)-[:EVIDENCE_FOR]-&gt;(StructuredEntity)</div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <div class="arch-stage-box" style="border-color:rgba(96,165,250,0.5);">
+                  <div class="arch-stage-title" style="color:#60A5FA;">Mechanic 3: Ultimate Joined Property Graph Data Structure</div>
+                  <div class="arch-sub-box blue">Multi-Modal Property Graph: Domain Nodes (Customer/Compound) + Document Nodes (Chunk) + Quantitative Attributes + Audit Provenance</div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">Mechanic 4: Graph Topology Pattern Recognition Engine</div>
+                  <div class="arch-sub-box amber">Cypher Structural Motif Queries + N-Hop Wire Layering Cycles + PageRank Centrality + Louvain Community Detection</div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <div class="arch-stage-box" style="border-color:rgba(61,220,151,0.5);">
+                  <div class="arch-stage-title" style="color:var(--emerald);">Mechanic 5: Precise Executive Leadership Deliverables</div>
+                  <div class="arch-sub-box emerald">Financial AML ($14.25M Exposure, Suspect List, 1-Click SAR) | Drug Discovery (Gefitinib IC50=2.3nM, Active Site Binding Recipe)</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- 5-STEP DETAILED TEXT DESCRIPTION BOXES -->
+            <div style="display:flex; flex-direction:column; gap:18px;">
+              
+              <!-- Breakdown 1 -->
+              <div style="background:var(--bg-2); border:1px solid var(--line-soft); border-radius:10px; padding:18px;">
+                <h4 style="color:var(--amber); margin-top:0; font-size:15px;">1. How Multiple Unstructured Documents Map to Each Other</h4>
+                <p style="color:var(--tx-2); font-size:12.5px; line-height:1.6; margin:0;">
+                  Unstructured documents (PDFs, Word docs, SAR narratives, scientific preprints) are linked using four complementary mechanics:<br>
+                  • <strong>Co-Occurrence Entity Linking:</strong> When two documents mention the same entity (e.g., <code style="color:var(--emerald);">Customer_TaxID</code> or <code style="color:var(--emerald);">UniProt_ID</code>), a shared entity node acts as the bridge: <code style="color:var(--mono);">(Doc1)-[:MENTIONS]->(Entity)<-[:MENTIONS]-(Doc2)</code>.<br>
+                  • <strong>Cross-Document Citation & Reference Extraction:</strong> Regex and LLM extraction parse explicit citations (e.g. PubMed <code style="color:var(--mono);">PMID:3829102</code> or Clinical Trial <code style="color:var(--mono);">NCT00003180</code>), creating explicit <code style="color:var(--mono);">(Doc1)-[:CITES]->(Doc2)</code> relationships.<br>
+                  • <strong>Dense Vector Embedding Distance:</strong> Text chunks are embedded into 384-dimensional vectors via ChromaDB. Chunks with cosine similarity $>0.82$ generate implicit semantic links <code style="color:var(--mono);">(Chunk1)-[:SIMILAR_TOPIC]->(Chunk2)</code>.<br>
+                  • <strong>Cross-Document Coreference Resolution:</strong> An LLM resolves ambiguous references (e.g., <em>"the suspect company"</em> in SAR 1 vs <em>"Acme Corp"</em> in Loan PDF 2) to the same canonical entity.
+                </p>
+              </div>
+
+              <!-- Breakdown 2 -->
+              <div style="background:var(--bg-2); border:1px solid var(--line-soft); border-radius:10px; padding:18px;">
+                <h4 style="color:var(--emerald); margin-top:0; font-size:15px;">2. How Unstructured Data Binds with Structured Data via Mapping Keys</h4>
+                <p style="color:var(--tx-2); font-size:12.5px; line-height:1.6; margin:0;">
+                  Once unstructured documents are mapped together, they are anchored to structured SQL/CSV tables using <strong>Canonical Business Mapping Keys</strong>:<br>
+                  • <strong>Extraction & Validation:</strong> During unstructured ingestion, spaCy NER and LLM JSON extraction extract canonical business keys (<code style="color:var(--emerald);">Tax_ID/SSN</code>, <code style="color:var(--emerald);">Account_IBAN</code>, <code style="color:var(--emerald);">UniProt_Accession</code>, <code style="color:var(--emerald);">InChIKey/SMILES</code>, <code style="color:var(--emerald);">NCT_ID</code>).<br>
+                  • <strong>Cypher Binding Script:</strong> The backend executes Cypher <code style="color:var(--mono);">MERGE</code> commands that bind document chunk nodes directly to primary structured entity nodes:<br>
+                  <code style="color:var(--mono); display:block; background:#121824; padding:8px; border-radius:6px; margin-top:6px; font-size:11.5px;">MATCH (chunk:Chunk {id: $chunk_id}), (acc:Account {iban: $extracted_iban}) MERGE (chunk)-[:EVIDENCE_FOR]->(acc)</code>
+                </p>
+              </div>
+
+              <!-- Breakdown 3 -->
+              <div style="background:var(--bg-2); border:1px solid var(--line-soft); border-radius:10px; padding:18px;">
+                <h4 style="color:#60A5FA; margin-top:0; font-size:15px;">3. Ultimate Joined Data Structure (Property Graph Model)</h4>
+                <p style="color:var(--tx-2); font-size:12.5px; line-height:1.6; margin:0;">
+                  The ultimate unified data structure is a <strong>Multi-Modal Property Graph</strong> in Neo4j comprising:<br>
+                  • <strong>Domain Nodes:</strong> <code style="color:var(--mono);">Customer</code>, <code style="color:var(--mono);">Account</code>, <code style="color:var(--mono);">Compound</code>, <code style="color:var(--mono);">TargetProtein</code>, <code style="color:var(--mono);">Pathway</code>, <code style="color:var(--mono);">Disease</code>.<br>
+                  • <strong>Document Metadata Nodes:</strong> <code style="color:var(--mono);">Document</code>, <code style="color:var(--mono);">Chunk</code>, <code style="color:var(--mono);">ClinicalTrial</code>.<br>
+                  • <strong>Properties:</strong> Biological/financial quantitative attributes (<code style="color:var(--mono); font-size:11px;">ic50_nm: 2.3</code>, <code style="color:var(--mono); font-size:11px;">amount_usd: 45000</code>), timestamps, and complete audit provenance (<code style="color:var(--mono); font-size:11px;">source_file: "sar_09.pdf"</code>, <code style="color:var(--mono); font-size:11px;">page: 4</code>).<br>
+                  • <strong>Typed Relationships:</strong> <code style="color:var(--mono); font-size:11px;">OWNS</code>, <code style="color:var(--mono); font-size:11px;">TRANSFERRED_FUNDS</code>, <code style="color:var(--mono); font-size:11px;">BINDS_TO</code>, <code style="color:var(--mono); font-size:11px;">PART_OF_PATHWAY</code>, <code style="color:var(--mono); font-size:11px;">EVIDENCE_FOR</code>.
+                </p>
+              </div>
+
+              <!-- Breakdown 4 -->
+              <div style="background:var(--bg-2); border:1px solid var(--line-soft); border-radius:10px; padding:18px;">
+                <h4 style="color:var(--amber); margin-top:0; font-size:15px;">4. How Pattern Recognition Works</h4>
+                <p style="color:var(--tx-2); font-size:12.5px; line-height:1.6; margin:0;">
+                  Unlike statistical machine learning, pattern recognition in GRAPHEN operates via <strong>Graph Topology Motif Matching & Graph Algorithms</strong>:<br>
+                  • <strong>Structural Motif Matching:</strong> Declarative Cypher queries search for multi-hop graph sub-structures, such as circular layering paths <code style="color:var(--mono);">(acc)-[:TRANSFERRED*3..6]->(acc)</code> or compound-target-pathway chains.<br>
+                  • <strong>PageRank Centrality:</strong> Ranks entity node importance to discover central money laundering kingpins or key biological hub proteins.<br>
+                  • <strong>Louvain Community Detection:</strong> Identifies tightly connected sub-networks (e.g. hidden synthetic identity fraud rings sharing IP addresses or off-target kinase toxicity clusters).
+                </p>
+              </div>
+
+              <!-- Breakdown 5 -->
+              <div style="background:var(--bg-2); border:1px solid var(--line-soft); border-radius:10px; padding:18px;">
+                <h4 style="color:var(--emerald); margin-top:0; font-size:15px;">5. Precise Executive Leadership Outputs</h4>
+                <p style="color:var(--tx-2); font-size:12.5px; line-height:1.6; margin:0;">
+                  Instead of generic summaries, leadership receives concrete, quantifiable business outcomes:<br>
+                  • <strong>Financial AML Output:</strong> Exact dollar laundering exposure identified (<strong>$14.25M across 3 layering rings</strong>), specific bad actors (`Acme Shell LLC`, `John Doe`), shared device IPs (`192.168.1.50`), and an automated 1-click Regulatory SAR filing package.<br>
+                  • <strong>Drug Discovery Output:</strong> Validated lead candidate (<strong>Gefitinib / LG-772</strong> targeting EGFR L858R mutation with nanomolar affinity <strong>IC50 = 2.3 nM</strong>), exact chemical active site binding recipe (Quinazoline core interacting with Met793 hinge), and off-target HER2 cross-binding toxicity alerts.
+                </p>
+              </div>
+
             </div>
           </div>
         </div>
-        <div class="layer-row">
-          <div class="layer-badge" style="background:#9B7CF6">L3</div>
-          <div class="layer-line">
-            <div class="layer-name">Knowledge Graph Layer</div>
-            <div class="layer-desc">Neo4j Community Edition · Cypher queries · ontology-constrained schema</div>
-          </div>
-        </div>
-        <div class="layer-row">
-          <div class="layer-badge" style="background:#27D199">L2</div>
-          <div class="layer-line">
-            <div class="layer-name">Extraction Layer</div>
-            <div class="layer-desc">spaCy NER · regex patterns · Groq/Ollama LLM structured extraction</div>
-          </div>
-        </div>
-        <div class="layer-row">
-          <div class="layer-badge" style="background:#FB5A6A">L1</div>
-          <div class="layer-line">
-            <div class="layer-name">Ingestion Layer</div>
-            <div class="layer-desc">pdfplumber · PyMuPDF · synthetic document generator (Faker + ReportLab)</div>
-          </div>
-        </div>
 
-        <div class="stack-grid">
-          <div class="stack-card">
-            <h4>Graph & Data</h4>
-            <div class="item">Neo4j Community 5.x</div>
-            <div class="item">ChromaDB (vector store)</div>
-            <div class="item">sentence-transformers</div>
-          </div>
-          <div class="stack-card">
-            <h4>AI / LLM</h4>
-            <div class="item">Groq — Llama 3.1 70B (free)</div>
-            <div class="item">Ollama — Mistral 7B (local)</div>
-            <div class="item">spaCy en_core_web_sm</div>
-          </div>
-          <div class="stack-card">
-            <h4>App & Tooling</h4>
-            <div class="item">Streamlit + FastAPI</div>
-            <div class="item">pdfplumber + PyMuPDF</div>
-            <div class="item">Cursor IDE (free tier)</div>
-          </div>
-        </div>
-
-        <div class="cost-banner">
-          <div>
-            <div class="ct">$0.00 / month</div>
-            <div class="cs">Total infrastructure cost for this entire POC — every tool shown is free or open-source
+        <!-- TAB 5: TECH STACK & CONTRIBUTION OF NEO4J, PROTEGE & CYPHER -->
+                <!-- TAB 5: TECH STACK & SERIAL COMPONENT EXECUTION ARCHITECTURE -->
+                <!-- TAB 5: TECH STACK & SERIAL COMPONENT EXECUTION ARCHITECTURE -->
+        <div id="archContent-techstack" class="arch-tab-content" style="display:none;">
+          <div style="background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; margin-bottom:24px; box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+            
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+              <div>
+                <span style="background:rgba(96,165,250,0.15); color:#60A5FA; font-size:11px; font-weight:700; padding:4px 10px; border-radius:6px; text-transform:uppercase;">Serial Component Execution Pipeline</span>
+                <h3 style="color:var(--tx-0); font-size:20px; margin:8px 0 0; font-weight:700;">Diagram 5: Serial Role of Protégé, ChromaDB, Neo4j, Cypher & Hybrid Graph-RAG</h3>
+              </div>
+              <span style="font-size:32px;">⚙️</span>
             </div>
+
+            <p style="color:var(--tx-2); font-size:13px; line-height:1.5; margin-bottom:20px;">
+              Comprehensive architectural flowchart showing the exact serial sequence of how raw structured tables and unstructured documents enter the platform, pass through Protégé OWL semantic rules, ChromaDB vector indexing, Neo4j property graph storage, Cypher pattern recognition, and Hybrid Graph-RAG to produce executive deliverables.
+            </p>
+
+            <!-- DIAGRAM 5 SERIAL EXECUTION FLOWCHART -->
+            <div style="display:flex; justify-content:center; margin-bottom:24px;">
+              <div class="arch-flowchart-container">
+                
+                <!-- Input Step -->
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">0. Multi-Source Input Data Streams</div>
+                  <div class="arch-sub-grid">
+                    <div class="arch-sub-box">Structured Input Data<span class="arch-sub-note">(Core Banking SQL, Wires, KYC, Assays, PubChem)</span></div>
+                    <div class="arch-sub-box">Unstructured Input Data<span class="arch-sub-note">(SAR Narratives, Loan PDFs, PubMed Papers, Protocols)</span></div>
+                  </div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Tool 1: Protégé OWL 2 -->
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">Step 1: Protégé & OWL 2 Ontology Schema <span style="float:right; color:var(--amber); font-size:11px; font-weight:600;">[Semantic Governance]</span></div>
+                  <div class="arch-sub-box amber">Defines allowed entity classes (Customer, Account, Compound, Target), relationship types (OWNS, TRANSFERRED, BINDS_TO), domain/range constraints, and validation rules BEFORE data enters the graph.</div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Tool 2: ChromaDB -->
+                <div class="arch-stage-box" style="border-color:rgba(155,124,246,0.5);">
+                  <div class="arch-stage-title" style="color:#9B7CF6;">Step 2: ChromaDB Vector Store & Embeddings <span style="float:right; color:#9B7CF6; font-size:11px; font-weight:600;">[Semantic Text Vectorization]</span></div>
+                  <div class="arch-sub-box blue">Chunks unstructured document text, extracts 384-dimensional dense vectors (sentence-transformers), and indexes semantic passages for instant cosine similarity vector retrieval.</div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Tool 3: Neo4j Graph DB -->
+                <div class="arch-stage-box" style="border-color:rgba(96,165,250,0.5);">
+                  <div class="arch-stage-title" style="color:#60A5FA;">Step 3: Neo4j Property Graph Database <span style="float:right; color:#60A5FA; font-size:11px; font-weight:600;">[Graph Topology & Storage]</span></div>
+                  <div class="arch-sub-box blue">Executes Cypher MERGE scripts to build a unified property graph in memory. Connects structured records and document chunks with indexless adjacency for O(1) multi-hop traversals.</div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Tool 4: Cypher Engine -->
+                <div class="arch-stage-box" style="border-color:rgba(255,159,10,0.5);">
+                  <div class="arch-stage-title" style="color:var(--amber);">Step 4: Cypher Query Pattern Recognition Engine <span style="float:right; color:var(--amber); font-size:11px; font-weight:600;">[Graph Motif & Rule Execution]</span></div>
+                  <div class="arch-sub-box amber">Executes declarative graph motif queries matching 3-6 hop circular wire layering rings, shared device fraud hubs, nanomolar affinity paths (IC50<50nM), and PageRank entity centrality.</div>
+                </div>
+                <div class="arch-arrow-down">↓</div>
+
+                <!-- Tool 5: Hybrid Graph-RAG & Leadership Output -->
+                <div class="arch-stage-box" style="border-color:rgba(61,220,151,0.5);">
+                  <div class="arch-stage-title" style="color:var(--emerald);">Step 5: Hybrid Graph-RAG Engine & Executive Deliverables <span style="float:right; color:var(--emerald); font-size:11px; font-weight:600;">[Dual Synthesis & Output]</span></div>
+                  <div class="arch-sub-box emerald">Fuses ChromaDB semantic vectors with Neo4j structural graph context to generate zero-hallucination executive deliverables ($14.25M AML exposure, 1-click SAR package, Gefitinib lead drug IC50=2.3nM).</div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- SERIAL ROLE BREAKDOWN TABLE (REPLACING PARAGRAPH DISPLAY CARDS) -->
+            <h4 style="color:var(--tx-0); font-size:16px; margin:24px 0 14px; font-weight:700;">⚙️ Serial Role Breakdown: How Inputs Flow to Outputs</h4>
+            
+            <div style="overflow-x:auto; background:var(--bg-2); border:1px solid var(--line-soft); border-radius:10px; padding:4px;">
+              <table style="width:100%; border-collapse:collapse; text-align:left; font-size:12.5px; color:var(--tx-1);">
+                <thead>
+                  <tr style="background:var(--surface); border-bottom:1.5px solid var(--line-strong); color:var(--tx-0);">
+                    <th style="padding:12px 14px; font-weight:700; width:110px;">Serial Sequence</th>
+                    <th style="padding:12px 14px; font-weight:700; width:170px;">System Component</th>
+                    <th style="padding:12px 14px; font-weight:700;">How it Takes Input</th>
+                    <th style="padding:12px 14px; font-weight:700;">Serial Technical Role</th>
+                    <th style="padding:12px 14px; font-weight:700;">Output Passed to Next Stage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid var(--line-soft);">
+                    <td style="padding:12px 14px; font-weight:700; color:var(--amber);">Step 0</td>
+                    <td style="padding:12px 14px; font-weight:700; color:var(--tx-0);">Multi-Source Inputs</td>
+                    <td style="padding:12px 14px;">Ingests Core Banking SQL, SWIFT Wires, KYC, ChEMBL Assays, SAR Narratives, Loan PDFs, PubMed Papers.</td>
+                    <td style="padding:12px 14px;">Receives structured tables and unstructured documents.</td>
+                    <td style="padding:12px 14px;">Raw byte streams and tabular rows.</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--line-soft);">
+                    <td style="padding:12px 14px; font-weight:700; color:var(--amber);">Step 1</td>
+                    <td style="padding:12px 14px; font-weight:700; color:var(--tx-0);">Protégé &amp; OWL 2 Ontology</td>
+                    <td style="padding:12px 14px;">Ingests domain concepts, class hierarchies, and relationship constraints designed in Protégé (<code style="color:var(--amber);">.owl</code> / <code style="color:var(--amber);">.ttl</code>).</td>
+                    <td style="padding:12px 14px;">Establishes semantic rules <strong>before</strong> data is processed. Defines entity classes (<code style="color:var(--mono);">Customer</code>, <code style="color:var(--mono);">Compound</code>) and object properties (<code style="color:var(--mono);">OWNS</code>, <code style="color:var(--mono);">BINDS_TO</code>).</td>
+                    <td style="padding:12px 14px;">Validated semantic schema rules governing graph writes.</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--line-soft);">
+                    <td style="padding:12px 14px; font-weight:700; color:#9B7CF6;">Step 2</td>
+                    <td style="padding:12px 14px; font-weight:700; color:var(--tx-0);">ChromaDB Vector Store</td>
+                    <td style="padding:12px 14px;">Ingests raw unstructured text extracted from PDFs/Word docs via PyMuPDF/pdfplumber.</td>
+                    <td style="padding:12px 14px;">Splits text into overlapping passages (2,000 chars), embeds vectors (<code style="color:var(--mono);">sentence-transformers/all-MiniLM-L6-v2</code>), and indexes passages for cosine search (&ge; 0.82).</td>
+                    <td style="padding:12px 14px;">Vector-indexed text passages and chunk IDs bound to Neo4j nodes.</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--line-soft);">
+                    <td style="padding:12px 14px; font-weight:700; color:#60A5FA;">Step 3</td>
+                    <td style="padding:12px 14px; font-weight:700; color:var(--tx-0);">Neo4j Property Graph DB</td>
+                    <td style="padding:12px 14px;">Ingests structured SQL/CSV rows, canonical mapping keys (<code style="color:var(--emerald);">Tax_ID</code>, <code style="color:var(--emerald);">IBAN</code>, <code style="color:var(--emerald);">UniProt_ID</code>, <code style="color:var(--emerald);">SMILES</code>), and chunk IDs.</td>
+                    <td style="padding:12px 14px;">Executes Cypher <code style="color:var(--mono);">MERGE</code> scripts building a unified property graph in memory. Uses <strong>Indexless Adjacency</strong> for O(1) multi-hop traversals.</td>
+                    <td style="padding:12px 14px;">Fully connected in-memory property graph.</td>
+                  </tr>
+                  <tr style="border-bottom:1px solid var(--line-soft);">
+                    <td style="padding:12px 14px; font-weight:700; color:var(--amber);">Step 4</td>
+                    <td style="padding:12px 14px; font-weight:700; color:var(--tx-0);">Cypher Query Engine</td>
+                    <td style="padding:12px 14px;">Ingests live property graph memory state from Neo4j + structural graph pattern templates.</td>
+                    <td style="padding:12px 14px;">Executes declarative graph motif queries to discover multi-hop layering rings <code style="color:var(--mono);">(acc)-[:TRANSFERRED*3..6]-&gt;(acc)</code>, shared device hubs, and PageRank centrality.</td>
+                    <td style="padding:12px 14px;">Extracted sub-graph paths, ringleader lists, and structural risk context.</td>
+                  </tr>
+                  <tr>
+                    <td style="padding:12px 14px; font-weight:700; color:var(--emerald);">Step 5</td>
+                    <td style="padding:12px 14px; font-weight:700; color:var(--tx-0);">Hybrid Graph-RAG Engine</td>
+                    <td style="padding:12px 14px;">Ingests vector semantic passages from ChromaDB + structural sub-graph path context from Neo4j Cypher.</td>
+                    <td style="padding:12px 14px;">Fuses vector and graph context into an LLM prompt (Groq Llama 3.1 70B / Ollama Mistral) for zero-hallucination decision synthesis.</td>
+                    <td style="padding:12px 14px; color:var(--emerald); font-weight:600;"><strong>Concrete Executive Deliverables:</strong> Quantified money laundering exposure (<strong>$14.25M</strong>), suspect accounts, 1-click SAR package, and lead drug validation recipe (<strong>Gefitinib / LG-772</strong>, IC50 = 2.3 nM).</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
           </div>
-          <div style="font-size:32px">🎉</div>
         </div>
       </div>
-      
+
       <!-- ============ STRUCTURED PIPELINE ============ -->
       <div class="view" id="view-structured">
         <div class="page-head">
@@ -6187,7 +6796,7 @@
         const response = await fetch('/api/domain/trending-use-cases', options);
         if (response.status !== 404) return response;
       } catch (_) {}
-      return fetch('http://127.0.0.1:8010/api/domain/trending-use-cases', options);
+      return fetch(getApiUrl('/api/domain/trending-use-cases'), options);
     }
 
     async function fetchTrendingUseCases(skipLlm, generation) {
@@ -6422,7 +7031,7 @@
         const response = await fetch('/api/domain/configure', options);
         if (response.status !== 404) return response;
       } catch (_) {}
-      return fetch('http://127.0.0.1:8010/api/domain/configure', options);
+      return fetch(getApiUrl('/api/domain/configure'), options);
     }
 
     async function requestDomainConfiguration(fullLlm) {
@@ -6909,7 +7518,7 @@
         const response = await fetch('/api/schema/registry', options);
         if (response.status !== 404) return response;
       } catch (_) {}
-      return fetch('http://127.0.0.1:8010/api/schema/registry', options);
+      return fetch(getApiUrl('/api/schema/registry'), options);
     }
 
     function renderSchemaRegistry(payload) {
@@ -9789,7 +10398,7 @@
         const response = await fetch(path, options);
         if (response.status !== 404) return response;
       } catch (_) {}
-      return fetch('http://127.0.0.1:8010' + path, options);
+      return fetch(getApiUrl(path), options);
     }
 
     function renderNextAiStatus(status) {
@@ -11516,7 +12125,7 @@
       } catch (e) { console.warn('cypher detections fast fetch', e); }
 
       if (!data || !data.detections) {
-        if (grid) grid.innerHTML = '<div class="cyph-loading">Could not load scenarios - check API on port 8010.</div>';
+        if (grid) grid.innerHTML = '<div class="cyph-loading">Could not load scenarios - check API connection.</div>';
         return;
       }
 
@@ -11596,11 +12205,11 @@
         body: JSON.stringify(body),
       };
       try {
-        const response = await fetch('/api/crossdoc/discover', options);
+        const response = await fetch(getApiUrl('/api/crossdoc/discover'), options);
         if (response.status !== 404) return response;
       } catch (_) {}
       // Compatibility fallback while a stale local dev process still owns 8010.
-      return fetch('http://127.0.0.1:8010/api/crossdoc/discover', options);
+      return fetch(getApiUrl('/api/crossdoc/discover'), options);
     }
 
     function renderCrossDocPayload(payload, refining) {
@@ -11740,7 +12349,7 @@
         const response = await fetch('/api/intelligence/report', options);
         if (response.status !== 404) return response;
       } catch (_) {}
-      return fetch('http://127.0.0.1:8010/api/intelligence/report', options);
+      return fetch(getApiUrl('/api/intelligence/report'), options);
     }
 
     async function intelligenceReportSummaryApiRequest(body) {
@@ -11753,7 +12362,7 @@
         const response = await fetch('/api/intelligence/report/summarize', options);
         if (response.status !== 404) return response;
       } catch (_) {}
-      return fetch('http://127.0.0.1:8010/api/intelligence/report/summarize', options);
+      return fetch(getApiUrl('/api/intelligence/report/summarize'), options);
     }
 
     function renderIntelligenceReportSummary(payload) {
@@ -11994,7 +12603,7 @@
         const response = await fetch('/api/final-report', options);
         if (response.status !== 404) return response;
       } catch (_) {}
-      return fetch('http://127.0.0.1:8010/api/final-report', options);
+      return fetch(getApiUrl('/api/final-report'), options);
     }
 
     async function finalReportSummaryApiRequest(body) {
@@ -12007,7 +12616,7 @@
         const response = await fetch('/api/final-report/summarize', options);
         if (response.status !== 404) return response;
       } catch (_) {}
-      return fetch('http://127.0.0.1:8010/api/final-report/summarize', options);
+      return fetch(getApiUrl('/api/final-report/summarize'), options);
     }
 
     function renderFinalReportSummary(payload) {

@@ -27,9 +27,9 @@ class Neo4jClient:
             auth=(self._user, self._password),
             # Fail fast when Neo4j is down instead of long retry loops that
             # flood the logs on every health-check poll.
-            connection_timeout=5.0,
-            connection_acquisition_timeout=5.0,
-            max_transaction_retry_time=5.0,
+            connection_timeout=20.0,
+            connection_acquisition_timeout=20.0,
+            max_transaction_retry_time=20.0,
         )
         logger.debug(f"Neo4jClient connected  uri={self._uri}")
 

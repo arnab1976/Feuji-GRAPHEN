@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Building2, Users, AlertTriangle, FileCheck, TrendingUp, RefreshCcw } from 'lucide-react';
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = 'http://127.0.0.1:8004';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ leases: 0, tenants: 0, criticalClauses: 0, totalSqft: 0 });
