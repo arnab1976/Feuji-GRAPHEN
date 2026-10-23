@@ -5416,12 +5416,27 @@
 <style>
 
     /* ================= ENHANCED TABLE SNAPSHOTS & TECH STACKS ================= */
+    .snapshot-panel {
+      background: #070B14;
+      border: 1.5px solid #23314E;
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 18px;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.65), 0 8px 24px rgba(0,0,0,0.35);
+      animation: snapSlideDown 0.25s ease-out;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
     .snapshot-tech-bar {
       background: #080E1C;
       border: 1px solid #1E2D4A;
       border-radius: 8px;
       padding: 12px 14px;
       margin-bottom: 16px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .snapshot-tech-bar-title {
       font-size: 11px;
@@ -5457,27 +5472,29 @@
     .snapshot-tech-pill.med strong {
       color: #3DDC97;
     }
+    
+    /* VERTICAL STACKING: EACH TABLE GETS 100% WIDTH OF THE CARD WITHOUT OVERFLOW */
     .snapshot-tables-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       margin-bottom: 16px;
-    }
-    @media (max-width: 1024px) {
-      .snapshot-tables-container {
-        grid-template-columns: 1fr;
-      }
     }
     .snapshot-table-box {
       background: #090E1A;
       border: 1px solid #1E293B;
       border-radius: 8px;
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
+      padding: 14px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
     }
     .snapshot-table-title {
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 800;
       color: #00F0FF;
       text-transform: uppercase;
@@ -5491,28 +5508,33 @@
       color: #3DDC97;
     }
     .snapshot-table-wrapper {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       overflow-x: auto;
-      max-height: 280px;
       border-radius: 6px;
       border: 1px solid #1A253A;
+      -webkit-overflow-scrolling: touch;
     }
     .snapshot-table {
       width: 100%;
+      max-width: 100%;
       border-collapse: collapse;
-      font-size: 11px;
+      font-size: 11.5px;
       font-family: var(--mono, monospace);
       text-align: left;
+      table-layout: auto;
     }
     .snapshot-table th {
       background: #0E1726;
       color: #00F0FF;
-      padding: 7px 10px;
+      padding: 8px 12px;
       font-weight: 700;
       border-bottom: 1px solid #23314E;
       position: sticky;
       top: 0;
       z-index: 2;
-      font-size: 10px;
+      font-size: 10.5px;
       letter-spacing: 0.5px;
       text-transform: uppercase;
       white-space: nowrap;
@@ -5521,11 +5543,14 @@
       color: #3DDC97;
     }
     .snapshot-table td {
-      padding: 7px 10px;
+      padding: 8px 12px;
       border-bottom: 1px solid #141E33;
       color: #CBD5E1;
       vertical-align: middle;
-      line-height: 1.4;
+      line-height: 1.5;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: break-word;
     }
     .snapshot-table tr:nth-child(even) td {
       background: rgba(255, 255, 255, 0.015);
@@ -5538,9 +5563,9 @@
     }
     .table-tag {
       display: inline-block;
-      padding: 2px 6px;
+      padding: 2px 7px;
       border-radius: 4px;
-      font-size: 9.5px;
+      font-size: 10px;
       font-weight: 700;
       white-space: nowrap;
     }
@@ -5549,8 +5574,67 @@
     .tag-amber { background: rgba(255, 159, 10, 0.15); color: #FF9F0A; border: 1px solid rgba(255, 159, 10, 0.3); }
     .tag-rose { background: rgba(255, 69, 58, 0.15); color: #FF453A; border: 1px solid rgba(255, 69, 58, 0.3); }
     .tag-purple { background: rgba(191, 90, 242, 0.15); color: #BF5AF2; border: 1px solid rgba(191, 90, 242, 0.3); }
-
-</style>
+    
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 14px;
+    }
+    @media (max-width: 900px) {
+      .snapshot-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .snapshot-col-box {
+      background: #090E1A;
+      border: 1px solid #1E293B;
+      border-radius: 8px;
+      padding: 12px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .snapshot-col-box pre {
+      margin: 0;
+      background: #050811 !important;
+      border: 1px solid #141E33;
+      border-radius: 6px;
+      padding: 12px;
+      font-size: 11px;
+      font-family: var(--mono, monospace);
+      color: #94A3B8;
+      max-height: 260px;
+      overflow: auto;
+      max-width: 100%;
+      box-sizing: border-box;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .snapshot-graph-vis {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 180px;
+      background: #050811;
+      border: 1px solid #141E33;
+      border-radius: 6px;
+      padding: 10px;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .snapshot-graph-vis svg {
+      width: 100%;
+      height: auto;
+      max-height: 240px;
+    }
+    </style>
 </head>
 
 <body>
@@ -7477,6 +7561,103 @@ RETURN origin.iban AS origin_account,
                       </ul>
                     </div>
                   </div>
+
+                  <div id="snapshot-aml-6" class="snapshot-panel" style="display:none;">
+                    <div class="snapshot-head">
+                      <div class="snapshot-head-title"><span>📊</span> STEP 6 DATA SNAPSHOT: Leadership Deliverables & Asset Seizure Package</div>
+                      <span class="snapshot-format-badge">FORMAT: FinCEN SAR XML & Forensic Asset Summary</span>
+                    </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill"><span>🤖</span><strong>Hybrid Graph-RAG Engine:</strong> Synthesizes multi-hop Neo4j Cypher subgraphs and ChromaDB text evidence into C-suite narrative</div><div class="snapshot-tech-pill"><span>📑</span><strong>FinCEN SAR XML Generator:</strong> Compiles regulatory BSA E-Filing Form 111 with 100% cited graph provenance</div><div class="snapshot-tech-pill"><span>🔒</span><strong>Asset Forensics Ledger:</strong> Calculates exact frozen asset amounts and generates court-admissible SWIFT cryptographic audit trail</div><div class="snapshot-tech-pill"><span>📊</span><strong>Leadership KPI Dashboard:</strong> Translates raw graph topologies into board-level risk exposure and balance-sheet impact metrics</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Investigation Target</th><th>Total Laundered Volume</th><th>Identified Jurisdictions</th><th>Shell Entities Involved</th><th>Primary Perpetrators</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-rose">Apex Global Syndicate</span></td><td><strong>$3,840,000.00 USD</strong></td><td>UK, UAE (Dubai), Switzerland, BVI</td><td>Apex Global, Meridian FZE, Velo Maritime</td><td>Vladimir S. (UBO), Elena R. (Nominee)</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Leadership Deliverable</th><th>Target Audience</th><th>Concrete Actionable Deliverable</th><th>Regulatory / Legal Defensibility</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-cyan">Board Risk Summary</span></td><td>Board of Directors / CEO</td><td>"$3.84M Syndicate Laundering Intercepted; $12M Exposure Averted"</td><td>100% Graph Proof, Zero False Positives</td></tr>
+    <tr><td><span class="table-tag tag-amber">FinCEN Form 111 (SAR)</span></td><td>CCO / FinCEN / FCA</td><td>Full pre-populated XML filing with narrative, UBO tax IDs & account paths</td><td>Fully Audited, Cypher Path Attached</td></tr>
+    <tr><td><span class="table-tag tag-green">Asset Seizure Ledger</span></td><td>CRO / Law Enforcement</td><td>"$3,840,000 in Accounts AE44EBIL & CH93SBIN flagged for immediate freeze"</td><td>Court-admissible SWIFT hash trail</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
+                    <div class="snapshot-grid">
+                      <div class="snapshot-col-box">
+                        <div class="snapshot-col-title"><span>📄</span> PRE-POPULATED FINCEN SAR XML & ASSET LEDGER</div>
+                        <pre class="snapshot-code-block">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;FinCEN_SAR_Filing package_id="SAR-2026-09-FINAL"&gt;
+  &lt;Summary&gt;
+    &lt;QuantifiedExposure currency="USD"&gt;14250000.00&lt;/QuantifiedExposure&gt;
+    &lt;IdentifiedLayeringRings count="3"&gt;Ring_Alpha, Ring_Beta, Ring_Gamma&lt;/IdentifiedLayeringRings&gt;
+    &lt;PrimaryBeneficialOwner tax_id="XX-XXX9102" passport="CY-482910"&gt;Vladimir S.&lt;/PrimaryBeneficialOwner&gt;
+    &lt;EngagedShellCompanies&gt;
+      &lt;Company name="Apex Global Logistics FZE" jurisdiction="UAE"/&gt;
+      &lt;Company name="BlueStar Trading Limited" jurisdiction="Cyprus"/&gt;
+    &lt;/EngagedShellCompanies&gt;
+  &lt;/Summary&gt;
+  &lt;ImmediateEnforcementAction&gt;
+    &lt;AccountsFrozen count="4" total_preserved_usd="3840000.00"/&gt;
+    &lt;RegulatoryPenaltyExposureMitigated value="$50M+"/&gt;
+    &lt;GraphAuditLineage root_node="402" total_provenance_hops="6"/&gt;
+  &lt;/ImmediateEnforcementAction&gt;
+&lt;/FinCEN_SAR_Filing&gt;</pre>
+                      </div>
+                      <div class="snapshot-col-box">
+                        <div class="snapshot-col-title"><span>🕸️</span> Visual Graph Representation (How it Works)</div>
+                        <div class="snapshot-graph-vis">
+                          <svg viewBox="0 0 380 180" width="100%" height="160">
+                            <!-- Executive Card -->
+                            <rect x="25" y="15" width="330" height="150" rx="8" fill="#0C1424" stroke="#3DDC97" stroke-width="1.5"/>
+                            <text x="190" y="38" fill="#3DDC97" font-size="11" font-weight="900" text-anchor="middle">BOARDROOM AUDIT DOSSIER</text>
+                            <!-- Metric 1 -->
+                            <rect x="45" y="55" width="135" height="42" rx="4" fill="#141E33" stroke="#23314E"/>
+                            <text x="55" y="70" fill="#94A3B8" font-size="7.5">TOTAL EXPOSURE</text>
+                            <text x="55" y="87" fill="#FF453A" font-size="12" font-weight="900">$14,250,000.00</text>
+                            <!-- Metric 2 -->
+                            <rect x="200" y="55" width="135" height="42" rx="4" fill="#141E33" stroke="#23314E"/>
+                            <text x="210" y="70" fill="#94A3B8" font-size="7.5">FROZEN ASSETS PRESERVED</text>
+                            <text x="210" y="87" fill="#3DDC97" font-size="12" font-weight="900">$3,840,000.00</text>
+                            <!-- Status bar -->
+                            <rect x="45" y="110" width="290" height="35" rx="4" fill="#13231B" stroke="#3DDC97" stroke-width="1"/>
+                            <text x="190" y="125" fill="#FFFFFF" font-size="8.5" font-weight="700" text-anchor="middle">FinCEN SAR Package Ready · 100% Mathematically Audited</text>
+                            <text x="190" y="137" fill="#3DDC97" font-size="8" text-anchor="middle">Vladimir S. & Apex Shell Indictment Docket Compiled</text>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
+                    <div class="snapshot-mechanics-footer">
+                      <strong>⚙️ What Happens in the Engine:</strong> Hybrid Graph-RAG aggregates graph metrics into a legally defensible briefing where every finding is cited with node IDs, timestamps, and SWIFT hashes.
+                    </div>
+                  </div>
                 </div>
 
               </div>
@@ -7825,102 +8006,7 @@ RETURN origin.iban AS origin_account,
                 <p style="color:var(--tx-2); font-size:13px; margin:0;">Exhaustive step-by-step breakdown from scientific preprint mining to concrete novel small-molecule clinical lead candidate delivery.</p>
               
 
-                  <div id="snapshot-aml-6" class="snapshot-panel" style="display:none;">
-                    <div class="snapshot-head">
-                      <div class="snapshot-head-title"><span>📊</span> STEP 6 DATA SNAPSHOT: Leadership Deliverables & Asset Seizure Package</div>
-                      <span class="snapshot-format-badge">FORMAT: FinCEN SAR XML & Forensic Asset Summary</span>
-                    </div>
-
-                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
-                    <div class="snapshot-tech-bar">
-                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
-                      <div class="snapshot-tech-pills">
-                        <div class="snapshot-tech-pill"><span>🤖</span><strong>Hybrid Graph-RAG Engine:</strong> Synthesizes multi-hop Neo4j Cypher subgraphs and ChromaDB text evidence into C-suite narrative</div><div class="snapshot-tech-pill"><span>📑</span><strong>FinCEN SAR XML Generator:</strong> Compiles regulatory BSA E-Filing Form 111 with 100% cited graph provenance</div><div class="snapshot-tech-pill"><span>🔒</span><strong>Asset Forensics Ledger:</strong> Calculates exact frozen asset amounts and generates court-admissible SWIFT cryptographic audit trail</div><div class="snapshot-tech-pill"><span>📊</span><strong>Leadership KPI Dashboard:</strong> Translates raw graph topologies into board-level risk exposure and balance-sheet impact metrics</div>
-                      </div>
-                    </div>
-
-                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
-                    <div class="snapshot-tables-container">
-                      <!-- INPUT TABLE -->
-                      <div class="snapshot-table-box">
-                        <div class="snapshot-table-title"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
-                        <div class="snapshot-table-wrapper">
-                          <table class="snapshot-table">
-  <thead><tr><th>Investigation Target</th><th>Total Laundered Volume</th><th>Identified Jurisdictions</th><th>Shell Entities Involved</th><th>Primary Perpetrators</th></tr></thead>
-  <tbody>
-    <tr><td><span class="table-tag tag-rose">Apex Global Syndicate</span></td><td><strong>$3,840,000.00 USD</strong></td><td>UK, UAE (Dubai), Switzerland, BVI</td><td>Apex Global, Meridian FZE, Velo Maritime</td><td>Vladimir S. (UBO), Elena R. (Nominee)</td></tr>
-  </tbody>
-</table>
-                        </div>
-                      </div>
-
-                      <!-- OUTPUT TABLE -->
-                      <div class="snapshot-table-box">
-                        <div class="snapshot-table-title"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
-                        <div class="snapshot-table-wrapper">
-                          <table class="snapshot-table">
-  <thead><tr><th>Leadership Deliverable</th><th>Target Audience</th><th>Concrete Actionable Deliverable</th><th>Regulatory / Legal Defensibility</th></tr></thead>
-  <tbody>
-    <tr><td><span class="table-tag tag-cyan">Board Risk Summary</span></td><td>Board of Directors / CEO</td><td>"$3.84M Syndicate Laundering Intercepted; $12M Exposure Averted"</td><td>100% Graph Proof, Zero False Positives</td></tr>
-    <tr><td><span class="table-tag tag-amber">FinCEN Form 111 (SAR)</span></td><td>CCO / FinCEN / FCA</td><td>Full pre-populated XML filing with narrative, UBO tax IDs & account paths</td><td>Fully Audited, Cypher Path Attached</td></tr>
-    <tr><td><span class="table-tag tag-green">Asset Seizure Ledger</span></td><td>CRO / Law Enforcement</td><td>"$3,840,000 in Accounts AE44EBIL & CH93SBIN flagged for immediate freeze"</td><td>Court-admissible SWIFT hash trail</td></tr>
-  </tbody>
-</table>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
-                    <div class="snapshot-grid">
-                      <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> PRE-POPULATED FINCEN SAR XML & ASSET LEDGER</div>
-                        <pre class="snapshot-code-block">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;FinCEN_SAR_Filing package_id="SAR-2026-09-FINAL"&gt;
-  &lt;Summary&gt;
-    &lt;QuantifiedExposure currency="USD"&gt;14250000.00&lt;/QuantifiedExposure&gt;
-    &lt;IdentifiedLayeringRings count="3"&gt;Ring_Alpha, Ring_Beta, Ring_Gamma&lt;/IdentifiedLayeringRings&gt;
-    &lt;PrimaryBeneficialOwner tax_id="XX-XXX9102" passport="CY-482910"&gt;Vladimir S.&lt;/PrimaryBeneficialOwner&gt;
-    &lt;EngagedShellCompanies&gt;
-      &lt;Company name="Apex Global Logistics FZE" jurisdiction="UAE"/&gt;
-      &lt;Company name="BlueStar Trading Limited" jurisdiction="Cyprus"/&gt;
-    &lt;/EngagedShellCompanies&gt;
-  &lt;/Summary&gt;
-  &lt;ImmediateEnforcementAction&gt;
-    &lt;AccountsFrozen count="4" total_preserved_usd="3840000.00"/&gt;
-    &lt;RegulatoryPenaltyExposureMitigated value="$50M+"/&gt;
-    &lt;GraphAuditLineage root_node="402" total_provenance_hops="6"/&gt;
-  &lt;/ImmediateEnforcementAction&gt;
-&lt;/FinCEN_SAR_Filing&gt;</pre>
-                      </div>
-                      <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>🕸️</span> Visual Graph Representation (How it Works)</div>
-                        <div class="snapshot-graph-vis">
-                          <svg viewBox="0 0 380 180" width="100%" height="160">
-                            <!-- Executive Card -->
-                            <rect x="25" y="15" width="330" height="150" rx="8" fill="#0C1424" stroke="#3DDC97" stroke-width="1.5"/>
-                            <text x="190" y="38" fill="#3DDC97" font-size="11" font-weight="900" text-anchor="middle">BOARDROOM AUDIT DOSSIER</text>
-                            <!-- Metric 1 -->
-                            <rect x="45" y="55" width="135" height="42" rx="4" fill="#141E33" stroke="#23314E"/>
-                            <text x="55" y="70" fill="#94A3B8" font-size="7.5">TOTAL EXPOSURE</text>
-                            <text x="55" y="87" fill="#FF453A" font-size="12" font-weight="900">$14,250,000.00</text>
-                            <!-- Metric 2 -->
-                            <rect x="200" y="55" width="135" height="42" rx="4" fill="#141E33" stroke="#23314E"/>
-                            <text x="210" y="70" fill="#94A3B8" font-size="7.5">FROZEN ASSETS PRESERVED</text>
-                            <text x="210" y="87" fill="#3DDC97" font-size="12" font-weight="900">$3,840,000.00</text>
-                            <!-- Status bar -->
-                            <rect x="45" y="110" width="290" height="35" rx="4" fill="#13231B" stroke="#3DDC97" stroke-width="1"/>
-                            <text x="190" y="125" fill="#FFFFFF" font-size="8.5" font-weight="700" text-anchor="middle">FinCEN SAR Package Ready · 100% Mathematically Audited</text>
-                            <text x="190" y="137" fill="#3DDC97" font-size="8" text-anchor="middle">Vladimir S. & Apex Shell Indictment Docket Compiled</text>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- 4. MECHANICS FOOTER -->
-                    <div class="snapshot-mechanics-footer">
-                      <strong>⚙️ What Happens in the Engine:</strong> Hybrid Graph-RAG aggregates graph metrics into a legally defensible briefing where every finding is cited with node IDs, timestamps, and SWIFT hashes.
-                    </div>
-                  </div>
+                  
                 </div>
 
               <div style="display:flex; flex-direction:column; gap:20px;">
@@ -8667,13 +8753,6 @@ RETURN mol.chembl_id AS lead_id,
                       </ul>
                     </div>
                   </div>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        
 
                   <div id="snapshot-med-6" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
@@ -8773,6 +8852,15 @@ RETURN mol.chembl_id AS lead_id,
                       <strong>⚙️ What Happens in the Engine:</strong> Hybrid Graph-RAG generates the complete discovery dossier with chemical formulas, 3D binding active-site recipes, and preclinical validation metrics with 100% provenance back to underlying PDB crystal coordinates.
                     </div>
                   </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        
+
+                  
                 </div>
 
         <!-- TAB 4: 5-STEP TECHNICAL MECHANICS FLOWCHART & TEXT -->
