@@ -5413,6 +5413,144 @@
       border-left-color: #3DDC97;
     }
 </style>
+<style>
+
+    /* ================= ENHANCED TABLE SNAPSHOTS & TECH STACKS ================= */
+    .snapshot-tech-bar {
+      background: #080E1C;
+      border: 1px solid #1E2D4A;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+    }
+    .snapshot-tech-bar-title {
+      font-size: 11px;
+      font-weight: 800;
+      color: #94A3B8;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .snapshot-tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .snapshot-tech-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #0D172B;
+      border: 1px solid #243556;
+      border-radius: 6px;
+      padding: 5px 11px;
+      font-size: 11px;
+      color: #E2E8F0;
+      line-height: 1.4;
+    }
+    .snapshot-tech-pill strong {
+      color: #00F0FF;
+    }
+    .snapshot-tech-pill.med strong {
+      color: #3DDC97;
+    }
+    .snapshot-tables-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 1024px) {
+      .snapshot-tables-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    .snapshot-table-box {
+      background: #090E1A;
+      border: 1px solid #1E293B;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+    }
+    .snapshot-table-title {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #00F0FF;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .snapshot-table-title.med {
+      color: #3DDC97;
+    }
+    .snapshot-table-wrapper {
+      overflow-x: auto;
+      max-height: 280px;
+      border-radius: 6px;
+      border: 1px solid #1A253A;
+    }
+    .snapshot-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      font-family: var(--mono, monospace);
+      text-align: left;
+    }
+    .snapshot-table th {
+      background: #0E1726;
+      color: #00F0FF;
+      padding: 7px 10px;
+      font-weight: 700;
+      border-bottom: 1px solid #23314E;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .snapshot-table.med th {
+      color: #3DDC97;
+    }
+    .snapshot-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid #141E33;
+      color: #CBD5E1;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+    .snapshot-table tr:nth-child(even) td {
+      background: rgba(255, 255, 255, 0.015);
+    }
+    .snapshot-table tr:hover td {
+      background: rgba(0, 240, 255, 0.05);
+    }
+    .snapshot-table.med tr:hover td {
+      background: rgba(61, 220, 151, 0.05);
+    }
+    .table-tag {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 9.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .tag-cyan { background: rgba(0, 240, 255, 0.15); color: #00F0FF; border: 1px solid rgba(0, 240, 255, 0.3); }
+    .tag-green { background: rgba(61, 220, 151, 0.15); color: #3DDC97; border: 1px solid rgba(61, 220, 151, 0.3); }
+    .tag-amber { background: rgba(255, 159, 10, 0.15); color: #FF9F0A; border: 1px solid rgba(255, 159, 10, 0.3); }
+    .tag-rose { background: rgba(255, 69, 58, 0.15); color: #FF453A; border: 1px solid rgba(255, 69, 58, 0.3); }
+    .tag-purple { background: rgba(191, 90, 242, 0.15); color: #BF5AF2; border: 1px solid rgba(191, 90, 242, 0.3); }
+
+</style>
 </head>
 
 <body>
@@ -6625,11 +6763,55 @@
                   <div id="snapshot-aml-1" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
                       <div class="snapshot-head-title"><span>📊</span> STEP 1 DATA SNAPSHOT: Unstructured Ingress & Entity Bridge</div>
-                      <span class="snapshot-head-tag">FORMAT: JSON Payload & NLP Co-Occurrence Graph</span>
+                      <span class="snapshot-format-badge">FORMAT: JSON Payload & NLP Co-Occurrence Graph</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill"><span>🔍</span><strong>spaCy & GLiNER:</strong> Domain NER extracting Person, Organization, Shell Corp, Jurisdiction from PDFs & emails</div><div class="snapshot-tech-pill"><span>🔮</span><strong>ChromaDB Vector Store:</strong> Dense 384-d semantic embedding index; links texts by cosine similarity (>0.84)</div><div class="snapshot-tech-pill"><span>🏛️</span><strong>Protégé & OWL 2:</strong> Financial Industry Business Ontology (FIBO) classifying legal entity types</div><div class="snapshot-tech-pill"><span>⚡</span><strong>FastCoref / LLM Coref:</strong> Cross-document coreference resolution reconciling alias names ('the borrower' == 'Apex')</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Document ID</th><th>Doc Type</th><th>Raw Text Narrative Snippet</th><th>Extracted NLP Entities</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-cyan">SAR-2026-09.pdf</span></td><td>FinCEN 111</td><td>"Customer Vladimir S. directed wire of $485k to Apex Global Logistics FZE ref INV-8819."</td><td><span class="table-tag tag-amber">Vladimir S. (PERSON)</span>, <span class="table-tag tag-purple">Apex Global (ORG)</span></td></tr>
+    <tr><td><span class="table-tag tag-cyan">LoanApp-482.pdf</span></td><td>Commercial Loan</td><td>"Apex Global Logistics FZE listed Vladimir S. as 100% beneficial owner (UBO)."</td><td><span class="table-tag tag-purple">Apex Global (BORROWER)</span>, <span class="table-tag tag-amber">Vladimir S. (UBO)</span></td></tr>
+    <tr><td><span class="table-tag tag-cyan">Email-Thread-14</span></td><td>Compliance Memo</td><td>"URGENT: Subpoena ref FINCEN-CASE-4412 received regarding shell accounts in Dubai."</td><td><span class="table-tag tag-rose">FINCEN-CASE-4412 (REF)</span>, <span class="table-tag tag-cyan">Dubai (LOC)</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Source Doc</th><th>Mapping Layer</th><th>Target Document / Entity Bridge</th><th>Constructed Graph Relationship</th></tr></thead>
+  <tbody>
+    <tr><td>SAR-2026-09.pdf</td><td>Named Entity Co-Occurrence</td><td>LoanApp-482.pdf (Shared: Vladimir S.)</td><td><span class="table-tag tag-cyan">[:CO_OCCURS_WITH {confidence: 0.98}]</span></td></tr>
+    <tr><td>SAR-2026-09.pdf</td><td>ChromaDB Vector Similarity</td><td>LoanApp-482.pdf (Layering Typology Match)</td><td><span class="table-tag tag-green">[:SEMANTIC_SIMILAR {cosine: 0.892}]</span></td></tr>
+    <tr><td>Email-Thread-14</td><td>Explicit Citation Parsing</td><td>SAR-2026-09.pdf (Tag: FINCEN-CASE-4412)</td><td><span class="table-tag tag-amber">[:CITES_CASE {ref: 'FINCEN-CASE-4412'}]</span></td></tr>
+    <tr><td>LoanApp-482.pdf</td><td>Cross-Doc Coreference</td><td>Email-Thread-14 ('the shell company' -> Apex)</td><td><span class="table-tag tag-purple">[:COREFERENCE_RESOLVED {prob: 0.95}]</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Raw Document Data & Extracted NLP Entities</div>
+                        <div class="snapshot-col-title"><span>📄</span> RAW DOCUMENT DATA & EXTRACTED NLP ENTITIES</div>
                         <pre class="snapshot-code-block">{
   "document_id": "SAR-2026-09.pdf",
   "filing_agency": "FinCEN Form 111",
@@ -6673,6 +6855,8 @@
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer">
                       <strong>⚙️ What Happens in the Engine:</strong> spaCy NER and LLM extraction scan the text for entities and case tags. When two separate documents mention <em>Apex Global Logistics FZE</em>, Neo4j builds an instant co-occurrence bridge: <code style="color:#00F0FF;">(SAR)-[:MENTIONS]->(Entity)<-[:MENTIONS]-(LoanApp)</code>. ChromaDB confirms semantic similarity (<code style="color:#3DDC97;">0.892</code>).
                     </div>
@@ -6710,12 +6894,57 @@
 
                   <div id="snapshot-aml-2" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title"><span>📊</span> STEP 2 DATA SNAPSHOT: Structured Relational-to-Graph Joins</div>
-                      <span class="snapshot-head-tag">FORMAT: SQL Records & Graph Edges</span>
+                      <div class="snapshot-head-title"><span>📊</span> STEP 2 DATA SNAPSHOT: Core Banking SQL & SWIFT Transactions</div>
+                      <span class="snapshot-format-badge">FORMAT: Relational SQL Tables & SWIFT MT103 Feeds</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill"><span>🗄️</span><strong>PostgreSQL / Oracle DB:</strong> Core banking OLTP tables: accounts, corporate customers, balance ledgers</div><div class="snapshot-tech-pill"><span>📨</span><strong>SWIFT MT103 / ISO 20022:</strong> Parses structured financial wire telegrams (Field 50K Ordering, Field 59 Beneficiary)</div><div class="snapshot-tech-pill"><span>🏛️</span><strong>Protégé & OWL 2 Ontology:</strong> Standardizes disparate bank relational schemas into unified FIBO properties</div><div class="snapshot-tech-pill"><span>⚙️</span><strong>dbt / Apache Spark:</strong> Cleanses, normalizes currency exchange rates to USD, and deduplicates customer Tax IDs</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Table Source</th><th>Primary Key</th><th>Attributes / Columns</th><th>Sample Row Values</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-cyan">core_banking.accounts</span></td><td>ACC-001</td><td>cust_id, iban, currency, balance</td><td>CUST-901, GB29NWBK60161331926819, GBP, £412,000</td></tr>
+    <tr><td><span class="table-tag tag-cyan">core_banking.customers</span></td><td>CUST-901</td><td>name, tax_id, risk_rating, kyc_status</td><td>Vladimir S., GB-77218-A, HIGH_RISK, VERIFIED</td></tr>
+    <tr><td><span class="table-tag tag-green">swift_ledger.mt103</span></td><td>WIRE-109</td><td>sender_iban, receiver_iban, amount, ts</td><td>GB29NWBK.., AE44EBIL60161331920000, $485,000, 2026-10-12</td></tr>
+    <tr><td><span class="table-tag tag-green">swift_ledger.mt103</span></td><td>WIRE-114</td><td>sender_iban, receiver_iban, amount, ts</td><td>AE44EBIL.., CH93SBIN00001122334455, $475,000, 2026-10-13</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Composite Join Key</th><th>Left Table (Source)</th><th>Right Table (Target)</th><th>Mapped Relational Transaction Flow</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-amber">cust_id: CUST-901</span></td><td>core_banking.customers</td><td>core_banking.accounts</td><td>Vladimir S. holds Account GB29NWBK (Balance: $520,000)</td></tr>
+    <tr><td><span class="table-tag tag-amber">iban: GB29NWBK..</span></td><td>core_banking.accounts</td><td>swift_ledger.mt103</td><td>Account initiated Outward SWIFT Wire W109 ($485,000.00 USD)</td></tr>
+    <tr><td><span class="table-tag tag-amber">iban: AE44EBIL..</span></td><td>swift_ledger.mt103</td><td>core_banking.companies</td><td>Wire W109 credited to Apex Global Logistics FZE (Dubai)</td></tr>
+    <tr><td><span class="table-tag tag-amber">iban: CH93SBIN..</span></td><td>swift_ledger.mt103</td><td>swiss_canton.accounts</td><td>Second-hop wire W114 transferred $475k to Meridian FZE (Geneva)</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Core Banking SQL & SWIFT MT103 Feeds</div>
+                        <div class="snapshot-col-title"><span>📄</span> CORE BANKING SQL & SWIFT MT103 FEEDS</div>
                         <pre class="snapshot-code-block">-- SQL Core Banking Table: accounts
 {
   "account_id": 881920,
@@ -6763,6 +6992,8 @@
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer">
                       <strong>⚙️ What Happens in the Engine:</strong> Relational SQL foreign keys are transformed into first-class graph relationships. Instead of performing slow relational table joins, Neo4j creates an indexed physical edge: <code style="color:#FF9F0A;">(AccA)-[:TRANSFERRED {amount_usd: 485000, wire_id: 'W109'}]->(AccB)</code>.
                     </div>
@@ -6802,12 +7033,56 @@ MERGE (chunk)-[:EVIDENCE_FOR {
 
                   <div id="snapshot-aml-3" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title"><span>📊</span> STEP 3 DATA SNAPSHOT: Unstructured-to-Structured Key Binding</div>
-                      <span class="snapshot-head-tag">FORMAT: Extraction JSON & Cypher MERGE</span>
+                      <div class="snapshot-head-title"><span>📊</span> STEP 3 DATA SNAPSHOT: Unstructured-to-Structured Mapping Key Resolution</div>
+                      <span class="snapshot-format-badge">FORMAT: Key Normalization Script & Cypher Transaction</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill"><span>🔑</span><strong>Deterministic / Fuzzy Normalizer:</strong> Reconciles unstructured textual entity strings to canonical relational DB keys</div><div class="snapshot-tech-pill"><span>🏛️</span><strong>Protégé & OWL 2:</strong> Validates semantic typing: maps strings to fibo-fnd:LegalEntity and fibo-sec:BeneficialOwner</div><div class="snapshot-tech-pill"><span>🌐</span><strong>Neo4j Property Graph DB:</strong> Executes MERGE statements creating typed edges connecting documents directly to SQL nodes</div><div class="snapshot-tech-pill"><span>⚡</span><strong>Cypher Ingestion Pipeline:</strong> Declarative transactional commits binding unstructured citations with zero SQL table lock</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Extracted Text Entity (Unstructured)</th><th>Source Document</th><th>Target SQL Table</th><th>Resolved DB Composite Key</th><th>Match Score</th></tr></thead>
+  <tbody>
+    <tr><td>"Vladimir S."</td><td>SAR-2026-09.pdf</td><td>core_banking.customers</td><td><span class="table-tag tag-amber">tax_id: GB-77218-A</span></td><td><span class="table-tag tag-green">1.00 (Exact)</span></td></tr>
+    <tr><td>"Apex Global Logistics"</td><td>LoanApp-482.pdf</td><td>core_banking.companies</td><td><span class="table-tag tag-purple">reg_lei: 5493001KJTIIG</span></td><td><span class="table-tag tag-green">0.97 (Fuzzy)</span></td></tr>
+    <tr><td>"INV-8819 ($485k wire)"</td><td>Compliance Memo</td><td>swift_ledger.mt103</td><td><span class="table-tag tag-cyan">wire_ref: W109</span></td><td><span class="table-tag tag-green">1.00 (Exact)</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Unstructured Source Node</th><th>Generated Graph Edge</th><th>Structured Target Node</th><th>Binding Cypher Action</th></tr></thead>
+  <tbody>
+    <tr><td>(Doc:SAR {id:'SAR-2026-09'})</td><td><span class="table-tag tag-rose">[:ALLEGES_CRIME_AGAINST]</span></td><td>(p:Person {name:'Vladimir S.', tax_id:'GB-77218-A'})</td><td>MERGE (Doc)-[:ALLEGES]->(p)</td></tr>
+    <tr><td>(p:Person {name:'Vladimir S.'})</td><td><span class="table-tag tag-amber">[:BENEFICIAL_OWNER_OF {share: 100}]</span></td><td>(c:Company {lei:'5493001KJTIIG'})</td><td>MERGE (p)-[:BENEFICIAL_OWNER_OF]->(c)</td></tr>
+    <tr><td>(c:Company {name:'Apex Global'})</td><td><span class="table-tag tag-cyan">[:HOLDS_ACCOUNT]</span></td><td>(a:Account {iban:'AE44EBIL..'})</td><td>MERGE (c)-[:HOLDS_ACCOUNT]->(a)</td></tr>
+    <tr><td>(Doc:LoanApp {id:'Loan-482'})</td><td><span class="table-tag tag-purple">[:DISCLOSES_COLLATERAL]</span></td><td>(w:WireTransfer {id:'W109', amt:485000})</td><td>MERGE (Doc)-[:DISCLOSES]->(w)</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Key Extraction & Cypher Binding Script</div>
+                        <div class="snapshot-col-title"><span>📄</span> KEY EXTRACTION & CYPHER BINDING SCRIPT</div>
                         <pre class="snapshot-code-block">// 1. Extracted Canonical Key Payload
 {
   "source_chunk": "CHK-8812 (SAR-2026-09 page 3)",
@@ -6854,6 +7129,8 @@ RETURN r.confidence, acc.iban;</pre>
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer">
                       <strong>⚙️ What Happens in the Engine:</strong> Canonical business mapping keys (IBAN, Tax_ID) bridge the gap. The Cypher query welds the qualitative suspicion in the PDF text directly to the quantitative bank ledger.
                     </div>
@@ -6899,12 +7176,57 @@ RETURN r.confidence, acc.iban;</pre>
 
                   <div id="snapshot-aml-4" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title"><span>📊</span> STEP 4 DATA SNAPSHOT: Multi-Modal Property Graph Topology</div>
-                      <span class="snapshot-head-tag">FORMAT: Neo4j JSON Graph Structure</span>
+                      <div class="snapshot-head-title"><span>📊</span> STEP 4 DATA SNAPSHOT: Multi-Modal Property Graph Data Structure</div>
+                      <span class="snapshot-format-badge">FORMAT: Labeled Property Graph (LPG) Node & Edge Schema</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill"><span>🌐</span><strong>Neo4j Enterprise Graph DB:</strong> Stores multi-modal property graph: heterogeneous vertices, directed relationships, and rich key-value maps</div><div class="snapshot-tech-pill"><span>🏛️</span><strong>Protégé & OWL 2 Reasoner:</strong> HermiT/Pellet semantic reasoner verifies ontology consistency, detects illegal circular inheritance</div><div class="snapshot-tech-pill"><span>🔮</span><strong>ChromaDB Vector Store:</strong> Vector collection linked to Neo4j Node IDs; enables hybrid semantic-topological RAG</div><div class="snapshot-tech-pill"><span>⚡</span><strong>APOC Procedures:</strong> High-throughput graph batch algorithms, schema indexing, and sub-graph JSON projections</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Integrated Modality</th><th>Data Format</th><th>Source System</th><th>Ingested Volume</th><th>Ontology Class (OWL 2)</th></tr></thead>
+  <tbody>
+    <tr><td>Unstructured Narratives</td><td>PDF & Email Text</td><td>ChromaDB / Document Store</td><td>1,420 Documents</td><td><span class="table-tag tag-cyan">fibo:ComplianceReport</span></td></tr>
+    <tr><td>Structured Accounts</td><td>Relational SQL Rows</td><td>Oracle Core Banking</td><td>85,000 Accounts</td><td><span class="table-tag tag-green">fibo:BankDepositAccount</span></td></tr>
+    <tr><td>SWIFT Wire Feeds</td><td>Flat MT103 / ISO</td><td>SWIFT Transaction Gateway</td><td>412,000 Wires</td><td><span class="table-tag tag-amber">fibo:PaymentExecution</span></td></tr>
+    <tr><td>PEP & Sanctions Lists</td><td>XML / JSON Feeds</td><td>OFAC / World-Check Watchlist</td><td>12,500 Profiles</td><td><span class="table-tag tag-rose">fibo:SanctionedSubject</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Subject Node (Label & ID)</th><th>Relationship Edge</th><th>Object Node (Label & ID)</th><th>Integrated Modality Bridge</th></tr></thead>
+  <tbody>
+    <tr><td>(p:Person {name:'Vladimir S.'})</td><td><span class="table-tag tag-amber">[:CONTROLS {share_pct: 100}]</span></td><td>(c:Company {name:'Apex Global'})</td><td>Hybrid: Unstructured UBO + SQL Company</td></tr>
+    <tr><td>(c:Company {name:'Apex Global'})</td><td><span class="table-tag tag-cyan">[:HOLDS_ACCOUNT]</span></td><td>(a:Account {iban:'AE44EBIL..'})</td><td>Structured: Core Banking Foreign Key</td></tr>
+    <tr><td>(a:Account {iban:'GB29NWBK..'})</td><td><span class="table-tag tag-rose">[:TRANSFERRED {amt:485000, ts:'2026-10-12'}]</span></td><td>(a:Account {iban:'AE44EBIL..'})</td><td>Structured: SWIFT MT103 Wire Edge</td></tr>
+    <tr><td>(doc:SAR {id:'SAR-2026-09'})</td><td><span class="table-tag tag-green">[:VECTOR_SIMILAR {cosine: 0.892}]</span></td><td>(doc:LoanApp {id:'LoanApp-482'})</td><td>Unstructured: ChromaDB Vector Cosine Sim</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Unified Multi-Modal Graph Data Serialization</div>
+                        <div class="snapshot-col-title"><span>📄</span> UNIFIED MULTI-MODAL GRAPH DATA SERIALIZATION</div>
                         <pre class="snapshot-code-block">{
   "graph": {
     "nodes": [
@@ -6951,6 +7273,8 @@ RETURN r.confidence, acc.iban;</pre>
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer">
                       <strong>⚙️ What Happens in the Engine:</strong> The unified multi-modal graph unites enterprise relational entities and unstructured evidence into an interconnected property model. Every transaction node carries its full legal provenance.
                     </div>
@@ -6994,12 +7318,55 @@ RETURN origin.iban AS origin_account,
 
                   <div id="snapshot-aml-5" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title"><span>📊</span> STEP 5 DATA SNAPSHOT: Cypher Circular Layering Ring Detection</div>
-                      <span class="snapshot-head-tag">FORMAT: Cypher Query & Circular Result Set</span>
+                      <div class="snapshot-head-title"><span>📊</span> STEP 5 DATA SNAPSHOT: Pattern Recognition & Circular Ring Detection</div>
+                      <span class="snapshot-format-badge">FORMAT: Executed Cypher Query & Detected Ring Data</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill"><span>⚡</span><strong>Neo4j Cypher Query Engine:</strong> Executes recursive multi-hop graph pattern matching ([:TRANSFERRED*3..6]) in <12ms</div><div class="snapshot-tech-pill"><span>🧠</span><strong>Neo4j Graph Data Science (GDS):</strong> Executes Louvain Community Detection, Weakly Connected Components (WCC), and PageRank</div><div class="snapshot-tech-pill"><span>⏱️</span><strong>Temporal-Amount Path Filter:</strong> Restricts cycle evaluation: hops must occur within 72 hours with <12% amount decay</div><div class="snapshot-tech-pill"><span>🛡️</span><strong>Graph Pattern Recognition:</strong> Automates discovery of circular layering rings, smurfing aggregators, and shadow directors</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Candidate Path Sequence</th><th>Accounts Traversed</th><th>Hop Amounts (USD)</th><th>Duration</th><th>Evaluated Typology Rule</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-rose">Path #1 (Cycle)</span></td><td>Acc A -> Acc B -> Acc C -> Acc A</td><td>$485k -> $475k -> $460k -> $455k</td><td>38.4 Hours</td><td>Circular Layering Ring (3-6 Hops)</td></tr>
+    <tr><td><span class="table-tag tag-amber">Path #2 (Fan-In)</span></td><td>5 Smurf Accounts -> Shell Hub</td><td>$9,500, $9,800, $9,200, $9,700</td><td>18.2 Hours</td><td>Smurfing / Structuring (<$10k limit)</td></tr>
+    <tr><td><span class="table-tag tag-green">Path #3 (Normal)</span></td><td>Client Acc -> Vendor Acc</td><td>$12,000</td><td>120 Hours</td><td>Standard Commercial Wire (No Alert)</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Detected Anomaly Typology</th><th>Ringleader / Origin</th><th>Laundered Sum</th><th>Traversal Topology</th><th>Risk Score</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-rose">CIRCULAR_LAYERING_RING</span></td><td>Vladimir S. (GB29NWBK..)</td><td><strong>$485,000.00 USD</strong></td><td>4-Hop Cross-Border Closed Loop</td><td><span class="table-tag tag-rose">98.4 / 100 (CRITICAL)</span></td></tr>
+    <tr><td><span class="table-tag tag-amber">STRUCTURING_FAN_IN</span></td><td>Apex Aggregator (AE44EBIL..)</td><td><strong>$76,400.00 USD</strong></td><td>8 Sub-$10k Wires within 24h</td><td><span class="table-tag tag-amber">94.1 / 100 (HIGH)</span></td></tr>
+    <tr><td><span class="table-tag tag-purple">HIGH_PAGERANK_CONTROLLER</span></td><td>Vladimir S. (CUST-901)</td><td>N/A (Centrality: 0.87)</td><td>Hub connecting 14 Shell Companies</td><td><span class="table-tag tag-rose">99.2 / 100 (CRITICAL)</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Executed Cypher Pattern & Query Output</div>
+                        <div class="snapshot-col-title"><span>📄</span> EXECUTED CYPHER PATTERN & QUERY OUTPUT</div>
                         <pre class="snapshot-code-block">// Recursive Multi-Hop Layering Pattern Query
 MATCH path = (origin:Account)-[wires:TRANSFERRED*3..6]->(origin)
 WHERE ALL(i IN range(0, size(wires)-2) WHERE 
@@ -7052,6 +7419,8 @@ RETURN origin.iban AS origin_account,
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer">
                       <strong>⚙️ What Happens in the Engine:</strong> Cypher natively evaluates arbitrary-depth recursive graph paths <code style="color:#FF453A;">[:TRANSFERRED*3..6]</code> with temporal constraints. SQL takes hours or crashes; Cypher finishes in under 12 milliseconds.
                     </div>
@@ -7458,12 +7827,53 @@ RETURN origin.iban AS origin_account,
 
                   <div id="snapshot-aml-6" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title"><span>📊</span> STEP 6 DATA SNAPSHOT: Executive Leadership Deliverables</div>
-                      <span class="snapshot-head-tag">FORMAT: FinCEN Form 111 XML & Asset Freeze Ledger</span>
+                      <div class="snapshot-head-title"><span>📊</span> STEP 6 DATA SNAPSHOT: Leadership Deliverables & Asset Seizure Package</div>
+                      <span class="snapshot-format-badge">FORMAT: FinCEN SAR XML & Forensic Asset Summary</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill"><span>🤖</span><strong>Hybrid Graph-RAG Engine:</strong> Synthesizes multi-hop Neo4j Cypher subgraphs and ChromaDB text evidence into C-suite narrative</div><div class="snapshot-tech-pill"><span>📑</span><strong>FinCEN SAR XML Generator:</strong> Compiles regulatory BSA E-Filing Form 111 with 100% cited graph provenance</div><div class="snapshot-tech-pill"><span>🔒</span><strong>Asset Forensics Ledger:</strong> Calculates exact frozen asset amounts and generates court-admissible SWIFT cryptographic audit trail</div><div class="snapshot-tech-pill"><span>📊</span><strong>Leadership KPI Dashboard:</strong> Translates raw graph topologies into board-level risk exposure and balance-sheet impact metrics</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Investigation Target</th><th>Total Laundered Volume</th><th>Identified Jurisdictions</th><th>Shell Entities Involved</th><th>Primary Perpetrators</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-rose">Apex Global Syndicate</span></td><td><strong>$3,840,000.00 USD</strong></td><td>UK, UAE (Dubai), Switzerland, BVI</td><td>Apex Global, Meridian FZE, Velo Maritime</td><td>Vladimir S. (UBO), Elena R. (Nominee)</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table">
+  <thead><tr><th>Leadership Deliverable</th><th>Target Audience</th><th>Concrete Actionable Deliverable</th><th>Regulatory / Legal Defensibility</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-cyan">Board Risk Summary</span></td><td>Board of Directors / CEO</td><td>"$3.84M Syndicate Laundering Intercepted; $12M Exposure Averted"</td><td>100% Graph Proof, Zero False Positives</td></tr>
+    <tr><td><span class="table-tag tag-amber">FinCEN Form 111 (SAR)</span></td><td>CCO / FinCEN / FCA</td><td>Full pre-populated XML filing with narrative, UBO tax IDs & account paths</td><td>Fully Audited, Cypher Path Attached</td></tr>
+    <tr><td><span class="table-tag tag-green">Asset Seizure Ledger</span></td><td>CRO / Law Enforcement</td><td>"$3,840,000 in Accounts AE44EBIL & CH93SBIN flagged for immediate freeze"</td><td>Court-admissible SWIFT hash trail</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Pre-Populated FinCEN SAR XML & Asset Ledger</div>
+                        <div class="snapshot-col-title"><span>📄</span> PRE-POPULATED FINCEN SAR XML & ASSET LEDGER</div>
                         <pre class="snapshot-code-block">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;FinCEN_SAR_Filing package_id="SAR-2026-09-FINAL"&gt;
   &lt;Summary&gt;
@@ -7505,6 +7915,8 @@ RETURN origin.iban AS origin_account,
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer">
                       <strong>⚙️ What Happens in the Engine:</strong> Hybrid Graph-RAG aggregates graph metrics into a legally defensible briefing where every finding is cited with node IDs, timestamps, and SWIFT hashes.
                     </div>
@@ -7548,12 +7960,55 @@ RETURN origin.iban AS origin_account,
 
                   <div id="snapshot-med-1" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title med"><span>📊</span> STEP 1 DATA SNAPSHOT: Biomedical Literature & BioNER Graph</div>
-                      <span class="snapshot-head-tag">FORMAT: PubMed XML Payload & BioNER Graph</span>
+                      <div class="snapshot-head-title med"><span>📊</span> STEP 1 DATA SNAPSHOT: Biomedical Unstructured Ingress & BioBERT Entities</div>
+                      <span class="snapshot-format-badge med">FORMAT: BioBERT Literature Entities & Ontological Triples</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill med"><span>🔬</span><strong>PubMed Central & bioRxiv APIs:</strong> Bulk literature ingestion: 1.4M biomedical research papers and oncology trial pre-prints</div><div class="snapshot-tech-pill med"><span>🧬</span><strong>BioBERT & SciSpacy:</strong> Domain NER (en_ner_bc5cdr_md) extracting Genes, Mutations, Diseases, Cell Lines, Residues</div><div class="snapshot-tech-pill med"><span>🔮</span><strong>ChromaDB Biomedical Vector Index:</strong> Dense 768-d BioLinkBERT embeddings for semantic target-mechanism search</div><div class="snapshot-tech-pill med"><span>🏛️</span><strong>Protégé & Gene Ontology (GO):</strong> Normalizes medical synonymy to OBO Foundry standard ontology IDs (GO, MeSH, DOID)</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>PMID / Source</th><th>Doc Type</th><th>Abstract Text Snippet</th><th>Extracted BioBERT Entities</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-green">PMID:3829104</span></td><td>Journal Paper</td><td>"The C797S mutation in EGFR confers profound resistance to osimertinib in NSCLC."</td><td><span class="table-tag tag-green">EGFR (GENE)</span>, <span class="table-tag tag-amber">C797S (MUTATION)</span>, <span class="table-tag tag-cyan">Osimertinib (DRUG)</span></td></tr>
+    <tr><td><span class="table-tag tag-green">NCT-0492</span></td><td>Trial Protocol</td><td>"Evaluating allosteric kinase inhibitors targeting osimertinib-refractory lung adenocarcinoma."</td><td><span class="table-tag tag-green">EGFR-mutant (TARGET)</span>, <span class="table-tag tag-purple">NSCLC (DISEASE)</span></td></tr>
+    <tr><td><span class="table-tag tag-green">BioRxiv-2026.04</span></td><td>Structure Study</td><td>"Cryo-EM reveals structural alteration at Met793 and Ser797 active pocket preventing covalent bond."</td><td><span class="table-tag tag-cyan">Met793 (RESIDUE)</span>, <span class="table-tag tag-amber">Ser797 (RESIDUE)</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Source Literature</th><th>Biomedical Mapping Layer</th><th>Linked Document / Concept Bridge</th><th>Constructed Ontological Relationship</th></tr></thead>
+  <tbody>
+    <tr><td>PMID:3829104</td><td>BioBERT Co-Occurrence</td><td>Clinical Trial NCT-0492 (Shared Target: EGFR C797S)</td><td><span class="table-tag tag-green">[:DRIVES_RESISTANCE_TO {drug: 'Osimertinib'}]</span></td></tr>
+    <tr><td>PMID:3829104</td><td>ChromaDB Vector Sim</td><td>BioRxiv-2026.04 (Structural Active Pocket)</td><td><span class="table-tag tag-cyan">[:MECHANISTICALLY_ALIGNED {cosine: 0.914}]</span></td></tr>
+    <tr><td>NCT-0492 Trial</td><td>Gene Ontology Normalization</td><td>Gene Ontology GO:0004714 (Kinase Activity)</td><td><span class="table-tag tag-purple">[:HAS_FUNCTION {go_id: 'GO:0004714'}]</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> PubMed Abstract Data & BioBERT Extracted Entities</div>
+                        <div class="snapshot-col-title"><span>📄</span> PUBMED ABSTRACT DATA & BIOBERT EXTRACTED ENTITIES</div>
                         <pre class="snapshot-code-block">{
   "document_id": "PMID:38192044",
   "journal": "Nature Oncology 2026",
@@ -7595,6 +8050,8 @@ RETURN origin.iban AS origin_account,
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer med">
                       <strong>⚙️ What Happens in the Engine:</strong> BioBERT extracts gene targets, mutations, and chemical entities. Papers describing the C797S resistance mutation are connected to a shared target node, and PubMedBERT vectors link corroborating clinical findings across international research teams.
                     </div>
@@ -7632,12 +8089,56 @@ RETURN origin.iban AS origin_account,
 
                   <div id="snapshot-med-2" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title med"><span>📊</span> STEP 2 DATA SNAPSHOT: Structured Assays & 3D Crystallography</div>
-                      <span class="snapshot-head-tag">FORMAT: ChEMBL Assays & PDB Coordinates</span>
+                      <div class="snapshot-head-title med"><span>📊</span> STEP 2 DATA SNAPSHOT: ChEMBL Bioassays & RCSB PDB Active Sites</div>
+                      <span class="snapshot-format-badge med">FORMAT: Structured ChEMBL Ki/IC50 & mmCIF 3D Atomic Coords</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill med"><span>💎</span><strong>RCSB Protein Data Bank (PDB):</strong> mmCIF 3D atomic coordinates of kinase active binding pockets at <2.0 Å resolution</div><div class="snapshot-tech-pill med"><span>💊</span><strong>ChEMBL & PubChem:</strong> Curated bioactivity assays: IC50, Ki, Kd values, and SMILES chemical structure representations</div><div class="snapshot-tech-pill med"><span>🧬</span><strong>UniProtKB & NCBI Gene:</strong> Canonical protein sequence reference aligning mutant amino acid positions (Position 797)</div><div class="snapshot-tech-pill med"><span>🏛️</span><strong>Protégé & OWL 2 (BFO / BioTop):</strong> Formal foundational ontology modeling chemical-biological interaction classes</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Database</th><th>Record ID</th><th>Target / Protein</th><th>Measurement / Metric</th><th>Sample Data Content</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-green">RCSB PDB</span></td><td>PDB: 7LUD</td><td>EGFR (C797S Mutated)</td><td>Resolution: 1.82 Å</td><td>Atomic 3D Coords: Met793 hinge, Lys745 salt bridge</td></tr>
+    <tr><td><span class="table-tag tag-cyan">ChEMBL</span></td><td>CHEMBL480112</td><td>EGFR C797S Kinase</td><td>IC50: 1.8 nM</td><td>Bioassay: Aminopyrimidine lead inhibition</td></tr>
+    <tr><td><span class="table-tag tag-cyan">ChEMBL</span></td><td>CHEMBL2034</td><td>EGFR C797S Kinase</td><td>IC50: >2,000 nM</td><td>Osimertinib benchmark (Activity Lost)</td></tr>
+    <tr><td><span class="table-tag tag-purple">UniProtKB</span></td><td>P00533</td><td>Human EGFR</td><td>Sequence: 1,210 AA</td><td>Wild-type Cys797 -> Mutated Ser797 coordinate</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Target Protein Key</th><th>Foreign Key Relational Join</th><th>Mapped Life Sciences Record</th><th>Biological Measurement</th><th>OWL 2 Property</th></tr></thead>
+  <tbody>
+    <tr><td>UniProt: P00533 (EGFR)</td><td>pdb_id -> 7LUD</td><td>PDB 7LUD (Resolution: 1.82 Å)</td><td>Active Pocket: Met793, Lys745</td><td><span class="table-tag tag-green">owl:Class :KinaseDomain</span></td></tr>
+    <tr><td>CHEMBL480112</td><td>target_id -> P00533</td><td>EGFR C797S Mutated Bioassay</td><td>IC50: 1.8 nM (High Potency)</td><td><span class="table-tag tag-cyan">owl:ObjectProperty :inhibitsActivity</span></td></tr>
+    <tr><td>CHEMBL2034</td><td>compound -> Osimertinib</td><td>Wild-Type vs C797S Comparison</td><td>IC50: 0.4 nM (WT) vs >2,000 nM (Mutant)</td><td><span class="table-tag tag-rose">owl:ObjectProperty :lacksBinding</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> ChEMBL Bioassay & PDB Active Pocket Data</div>
+                        <div class="snapshot-col-title"><span>📄</span> CHEMBL BIOASSAY & PDB ACTIVE POCKET DATA</div>
                         <pre class="snapshot-code-block">-- ChEMBL High-Throughput Bioactivity Record
 {
   "assay_id": 182904,
@@ -7685,6 +8186,8 @@ RETURN origin.iban AS origin_account,
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer med">
                       <strong>⚙️ What Happens in the Engine:</strong> Relational bioassays and PDB crystal structures are transformed into a molecular graph. The small molecule is physically connected to the protein active site with quantitative binding affinity properties (<code style="color:#3DDC97;">ic50_nm: 1.8</code>).
                     </div>
@@ -7722,12 +8225,56 @@ MERGE (chunk)-[:VALIDATES_MOLECULE]->(mol);</pre>
 
                   <div id="snapshot-med-3" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title med"><span>📊</span> STEP 3 DATA SNAPSHOT: Bio Key Binding (Literature to Chemistry)</div>
-                      <span class="snapshot-head-tag">FORMAT: Extraction JSON & Cypher MERGE</span>
+                      <div class="snapshot-head-title med"><span>📊</span> STEP 3 DATA SNAPSHOT: Biomedical Mapping Key Resolution & Cypher Binding</div>
+                      <span class="snapshot-format-badge med">FORMAT: UniProt/InChIKey Resolution & Cypher Graph Ingest</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill med"><span>🔑</span><strong>UniProt & InChIKey Resolver:</strong> Standardizes research text mentions to immutable biological accessions and chemical keys</div><div class="snapshot-tech-pill med"><span>🏛️</span><strong>Protégé & Gene Ontology:</strong> Maps synonymous medical terminology to standardized GO, MeSH, and ChEMBL entity classes</div><div class="snapshot-tech-pill med"><span>🌐</span><strong>Neo4j Cypher Ingest Engine:</strong> Binds unstructured literature citations directly to 3D atomic active pocket nodes</div><div class="snapshot-tech-pill med"><span>⚡</span><strong>SMILES Structure Normalizer:</strong> RDKit canonicalization ensuring identical stereochemistry for small molecule ligands</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Unstructured Text Mention</th><th>Source Literature</th><th>Target Life Science DB</th><th>Resolved Deterministic Key</th><th>Validation</th></tr></thead>
+  <tbody>
+    <tr><td>"EGFR exon 19 del / C797S"</td><td>PMID:3829104</td><td>UniProtKB</td><td><span class="table-tag tag-green">UniProt: P00533 (Position: 797)</span></td><td><span class="table-tag tag-green">100% Sequence Valid</span></td></tr>
+    <tr><td>"Osimertinib / Tagrisso"</td><td>Trial NCT-0492</td><td>ChEMBL / PubChem</td><td><span class="table-tag tag-cyan">InChIKey: UCGDIPOCXAYWHS..</span></td><td><span class="table-tag tag-green">100% Chemical Valid</span></td></tr>
+    <tr><td>"Hinge pocket Met793"</td><td>BioRxiv Structure Study</td><td>RCSB PDB</td><td><span class="table-tag tag-purple">PDB: 7LUD (Chain A, Pocket 1)</span></td><td><span class="table-tag tag-green">100% 3D Atomic Valid</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Source Literature Node</th><th>Constructed Biological Relationship</th><th>Target Life Science Node</th><th>Graph Ingestion Action</th></tr></thead>
+  <tbody>
+    <tr><td>(Paper:PMID_3829104)</td><td><span class="table-tag tag-green">[:REPORTS_TARGET_MUTATION]</span></td><td>(p:Protein {uniprot:'P00533', mutant:'C797S'})</td><td>MERGE (Paper)-[:REPORTS]->(p)</td></tr>
+    <tr><td>(p:Protein {uniprot:'P00533'})</td><td><span class="table-tag tag-cyan">[:HAS_3D_CRYSTAL_STRUCTURE]</span></td><td>(pdb:PDBStructure {id:'7LUD', res:1.82})</td><td>MERGE (p)-[:HAS_3D]->(pdb)</td></tr>
+    <tr><td>(pdb:PDBStructure {id:'7LUD'})</td><td><span class="table-tag tag-purple">[:CONTAINS_BINDING_POCKET]</span></td><td>(pocket:Pocket {hinge:'Met793', salt:'Lys745'})</td><td>MERGE (pdb)-[:CONTAINS]->(pocket)</td></tr>
+    <tr><td>(Drug:Candidate_904)</td><td><span class="table-tag tag-amber">[:COMPLEMENTS_ACTIVE_POCKET]</span></td><td>(pocket:Pocket {hinge:'Met793'})</td><td>MERGE (Drug)-[:BINDS_POCKET]->(pocket)</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Bio-Key Extraction & Cypher Binding Script</div>
+                        <div class="snapshot-col-title"><span>📄</span> BIO-KEY EXTRACTION & CYPHER BINDING SCRIPT</div>
                         <pre class="snapshot-code-block">// 1. Extracted Biomedical Mapping Keys
 {
   "source_chunk": "PMID:38192044 (page 4, paragraph 2)",
@@ -7777,6 +8324,8 @@ MERGE (chunk)-[:VALIDATES_MOLECULE]->(mol);</pre>
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer med">
                       <strong>⚙️ What Happens in the Engine:</strong> Canonical bio-accessions (UniProt, InChIKey) ground textual literature to physical compounds and receptors. Published claims are cross-validated with in-vitro wet lab readouts.
                     </div>
@@ -7821,12 +8370,57 @@ MERGE (chunk)-[:VALIDATES_MOLECULE]->(mol);</pre>
 
                   <div id="snapshot-med-4" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title med"><span>📊</span> STEP 4 DATA SNAPSHOT: Multi-Modal Biomedical Property Graph</div>
-                      <span class="snapshot-head-tag">FORMAT: Neo4j Graph Data Model</span>
+                      <div class="snapshot-head-title med"><span>📊</span> STEP 4 DATA SNAPSHOT: Unified Biomedical Knowledge Graph Structure</div>
+                      <span class="snapshot-format-badge med">FORMAT: Biomedical Labeled Property Graph (LPG) Schema</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill med"><span>🌐</span><strong>Neo4j Biomedical Graph DB:</strong> Multi-scale property graph uniting literature, genomics, 3D structures, and clinical trials</div><div class="snapshot-tech-pill med"><span>🏛️</span><strong>Protégé & OWL 2 Reasoner:</strong> Guarantees formal biological taxonomies; prevents inconsistent enzymatic inhibition classes</div><div class="snapshot-tech-pill med"><span>🔮</span><strong>ChromaDB Bio-Vector Store:</strong> Stores 768-d BioLinkBERT embeddings for natural language hypothesis generation</div><div class="snapshot-tech-pill med"><span>🧬</span><strong>Neo4j APOC & GDS Library:</strong> Executes graph traversals across protein-protein networks and ligand chemical graphs</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Biological Modality</th><th>Data Format</th><th>Source Database</th><th>Ingested Entity Volume</th><th>Ontology Class (OWL 2)</th></tr></thead>
+  <tbody>
+    <tr><td>Clinical Abstracts</td><td>BioNLP Text / XML</td><td>PubMed Central / BioRxiv</td><td>450,000 Articles</td><td><span class="table-tag tag-green">bfo:ScientificPublication</span></td></tr>
+    <tr><td>3D Protein Pockets</td><td>mmCIF Atomic Files</td><td>RCSB Protein Data Bank</td><td>2,800 Crystal Structures</td><td><span class="table-tag tag-cyan">bfo:ProteinConformation</span></td></tr>
+    <tr><td>Chemical Bioassays</td><td>Bioactivity Rows</td><td>ChEMBL 33 Database</td><td>1,200,000 Bioassays</td><td><span class="table-tag tag-amber">bfo:BioAssayMeasurement</span></td></tr>
+    <tr><td>Patient Trial Data</td><td>Tabular Cohort Data</td><td>ClinicalTrials.gov</td><td>8,500 Trial Cohorts</td><td><span class="table-tag tag-purple">bfo:ClinicalObservation</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Subject (Biomedical Entity)</th><th>Biological Relationship Edge</th><th>Object (Target / Molecule)</th><th>Multi-Modal Integration</th></tr></thead>
+  <tbody>
+    <tr><td>(Protein:EGFR_C797S)</td><td><span class="table-tag tag-green">[:ASSOCIATED_WITH_DISEASE]</span></td><td>(Disease:Osimertinib_Resistant_NSCLC)</td><td>Unstructured: PubMed BioNLP Ingest</td></tr>
+    <tr><td>(Protein:EGFR_C797S)</td><td><span class="table-tag tag-cyan">[:EXHIBITS_STRUCTURAL_CONFORMATION]</span></td><td>(PDB:7LUD {res: 1.82, chain:'A'})</td><td>Structured: RCSB PDB Coordinates</td></tr>
+    <tr><td>(Candidate:FEU_EGFR_904)</td><td><span class="table-tag tag-green">[:POTENTLY_INHIBITS {ic50: 1.8, unit:'nM'}]</span></td><td>(Protein:EGFR_C797S)</td><td>Structured: ChEMBL Bioactivity Join</td></tr>
+    <tr><td>(Candidate:FEU_EGFR_904)</td><td><span class="table-tag tag-purple">[:SPATIALLY_COMPATIBLE_WITH]</span></td><td>(Pocket:Met793_Lys745 {hbonds: 2})</td><td>Multi-Modal: 3D Coordinate Mapping</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Unified Biomedical Graph JSON Serialization</div>
+                        <div class="snapshot-col-title"><span>📄</span> UNIFIED BIOMEDICAL GRAPH JSON SERIALIZATION</div>
                         <pre class="snapshot-code-block">{
   "biomedical_graph": {
     "nodes": [
@@ -7871,6 +8465,8 @@ MERGE (chunk)-[:VALIDATES_MOLECULE]->(mol);</pre>
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer med">
                       <strong>⚙️ What Happens in the Engine:</strong> Chemistry, target genomics, structural biology, and patient disease ontologies are modeled in one unified graph, enabling multi-disciplinary drug discovery queries in milliseconds.
                     </div>
@@ -7917,12 +8513,54 @@ RETURN mol.chembl_id AS lead_id,
 
                   <div id="snapshot-med-5" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title med"><span>📊</span> STEP 5 DATA SNAPSHOT: Multi-Objective Kinase Selectivity Cypher</div>
-                      <span class="snapshot-head-tag">FORMAT: Cypher Query & Tabular Results</span>
+                      <div class="snapshot-head-title med"><span>📊</span> STEP 5 DATA SNAPSHOT: Kinase Selectivity Pattern Recognition & Link Prediction</div>
+                      <span class="snapshot-format-badge med">FORMAT: Executed Cypher Selectivity Query & Hit Data</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill med"><span>⚡</span><strong>Neo4j Cypher Graph Engine:</strong> Performs subgraph isomorphism querying kinase binding pockets across 500+ kinome targets</div><div class="snapshot-tech-pill med"><span>🧪</span><strong>RDKit Cheminformatics:</strong> Computes molecular weight (MW: 513.57), LogP, tPSA, and Lipinski Rule of 5 drug-likeness</div><div class="snapshot-tech-pill med"><span>🧠</span><strong>PyTorch Geometric (PyG):</strong> Graph Neural Network (GNN) link prediction predicting ligand-protein binding affinity</div><div class="snapshot-tech-pill med"><span>🛡️</span><strong>Off-Target Safety Screener:</strong> Traverses hERG cardiac channel and wild-type EGFR bioassays ensuring zero toxicity</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Compound ID</th><th>Molecular Scaffold / Warhead</th><th>Target Kinase Affinity</th><th>Off-Target (hERG / WT)</th><th>Structural Fit</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-green">FEU-EGFR-904</span></td><td>Aminopyrimidine + Cyclobutane</td><td><strong>IC50: 1.8 nM (C797S)</strong></td><td>IC50: >10,000 nM (180x WT)</td><td>Optimal (Lys745 Salt Bridge)</td></tr>
+    <tr><td><span class="table-tag tag-amber">Analog-B2</span></td><td>Pyrimidine + Straight Acrylamide</td><td>IC50: 82.0 nM (C797S)</td><td>IC50: 340 nM (Poor Selectivity)</td><td>Steric Clash with Ser797</td></tr>
+    <tr><td><span class="table-tag tag-rose">Osimertinib</span></td><td>Standard Covalent Inhibitor</td><td>IC50: >2,000 nM (Inactive)</td><td>IC50: 0.4 nM (Wild-Type)</td><td>Ineffective (Lost Cys797)</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Lead Candidate</th><th>Predicted Binding Mechanism</th><th>Selectivity Ratio</th><th>Oral Bioavailability</th><th>Pattern Recognition Status</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-green">FEU-EGFR-904</span></td><td>Non-Covalent Lys745 Salt Bridge Trap</td><td><strong>>180x Selective vs WT</strong></td><td>78% Oral (Low CYP3A4 Clearance)</td><td><span class="table-tag tag-green">TOP LEAD CANDIDATE</span></td></tr>
+    <tr><td><span class="table-tag tag-cyan">FEU-EGFR-907</span></td><td>Dual Hinge-Binding Allosteric Pocket</td><td>45x Selective vs WT</td><td>52% Oral Bioavailability</td><td><span class="table-tag tag-cyan">BACKUP OPTIMIZATION</span></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Executed Kinase Selectivity Query & Results</div>
+                        <div class="snapshot-col-title"><span>📄</span> EXECUTED KINASE SELECTIVITY QUERY & RESULTS</div>
                         <pre class="snapshot-code-block">// Multi-Objective Optimization Cypher Query
 MATCH (mol:SmallMolecule)-[r_mut:POTENT_INHIBITOR]->(mutant:Target {gene: "EGFR", variant: "C797S"})
 MATCH (mol)-[r_wt:POTENT_INHIBITOR]->(wt:Target {gene: "EGFR", variant: "WildType"})
@@ -7973,6 +8611,8 @@ RETURN mol.chembl_id AS lead_id,
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer med">
                       <strong>⚙️ What Happens in the Engine:</strong> Cypher simultaneously filters for high nanomolar mutant potency (<code style="color:#3DDC97;">1.8 nM</code>), broad therapeutic window over wild-type (<code style="color:#FF9F0A;">180x</code>), and zero cardiotoxicity (<code style="color:#00F0FF;">>10,000 nM</code>).
                     </div>
@@ -8037,12 +8677,53 @@ RETURN mol.chembl_id AS lead_id,
 
                   <div id="snapshot-med-6" class="snapshot-panel" style="display:none;">
                     <div class="snapshot-head">
-                      <div class="snapshot-head-title med"><span>📊</span> STEP 6 DATA SNAPSHOT: R&D Executive Dossier & Lead Synthesis</div>
-                      <span class="snapshot-head-tag">FORMAT: IND Lead Dossier & Chemical Recipe</span>
+                      <div class="snapshot-head-title med"><span>📊</span> STEP 6 DATA SNAPSHOT: CSO Drug Dossier & Chemical Synthesis Recipe</div>
+                      <span class="snapshot-format-badge med">FORMAT: Preclinical Discovery Dossier & SMILES Recipe</span>
                     </div>
+
+                    <!-- 1. REQUIRED TOOLS & TECH STACK STRIP -->
+                    <div class="snapshot-tech-bar">
+                      <div class="snapshot-tech-bar-title">🛠️ REQUIRED TOOLS & TECH STACK TO SUPPORT THIS STEP:</div>
+                      <div class="snapshot-tech-pills">
+                        <div class="snapshot-tech-pill med"><span>🤖</span><strong>Hybrid Graph-RAG Engine:</strong> Synthesizes multi-hop PDB crystal coordinates and ChEMBL assays into discovery dossiers</div><div class="snapshot-tech-pill med"><span>⚗️</span><strong>RDKit & ChemDraw Synthesis Engine:</strong> Generates validated 4-step organic synthesis routes with precursor CAS numbers & yields</div><div class="snapshot-tech-pill med"><span>📑</span><strong>FDA IND Regulatory Module:</strong> Auto-formats Preclinical Investigational New Drug (IND) briefing documents for CDER</div><div class="snapshot-tech-pill med"><span>📈</span><strong>Pharma Commercial Analytics:</strong> Forecasts market opportunity ($2.8B global NSCLC) and hit-to-lead timeline compression</div>
+                      </div>
+                    </div>
+
+                    <!-- 2. DATA SNAPSHOT TABLES (INPUT VS OUTPUT) -->
+                    <div class="snapshot-tables-container">
+                      <!-- INPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📥</span> INPUT DATA SNAPSHOT (Raw Feeds & Sources)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Target Disease / Mutation</th><th>Novel Lead Candidate</th><th>Chemical Formula & MW</th><th>Potency & Selectivity</th><th>Commercial Opportunity</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-green">Osimertinib-Resistant NSCLC</span></td><td><span class="table-tag tag-green">FEU-EGFR-904</span></td><td>C28H28FN7O2 (MW: 513.57)</td><td>IC50: 1.8 nM (>180x WT)</td><td><strong>$2.8B USD Addressable Market</strong></td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+
+                      <!-- OUTPUT TABLE -->
+                      <div class="snapshot-table-box">
+                        <div class="snapshot-table-title med"><span>📤</span> OUTPUT DATA SNAPSHOT (Transformed & Mapped Results)</div>
+                        <div class="snapshot-table-wrapper">
+                          <table class="snapshot-table med">
+  <thead><tr><th>Leadership Deliverable</th><th>Target Leadership Audience</th><th>Concrete Actionable Deliverable</th><th>Business & Clinical Impact</th></tr></thead>
+  <tbody>
+    <tr><td><span class="table-tag tag-green">Novel Lead Dossier</span></td><td>Chief Scientific Officer (CSO)</td><td>FEU-EGFR-904 composition-of-matter IP & patentable crystal binding pose</td><td>First-in-Class Asset with Strong Patentability</td></tr>
+    <tr><td><span class="table-tag tag-cyan">4-Step Synthesis Recipe</span></td><td>VP of Medicinal Chemistry</td><td>Step-by-step reaction conditions: Aminopyrimidine core + fluorophenyl tail (68% yield)</td><td>Wet-lab synthesis ready in 14 days</td></tr>
+    <tr><td><span class="table-tag tag-purple">Preclinical Target Dossier</span></td><td>Board of Directors / Head of R&D</td><td>Hit-to-lead timeline compressed from 18 months down to <strong>6 weeks</strong></td><td>Preclinical Phase I Candidate Ready</td></tr>
+  </tbody>
+</table>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- 3. RAW PAYLOAD & VISUAL GRAPH REPRESENTATION -->
                     <div class="snapshot-grid">
                       <div class="snapshot-col-box">
-                        <div class="snapshot-col-title"><span>📄</span> Novel Drug Synthesis Recipe & Regulatory Dossier</div>
+                        <div class="snapshot-col-title"><span>📄</span> NOVEL DRUG SYNTHESIS RECIPE & REGULATORY DOSSIER</div>
                         <pre class="snapshot-code-block">{
   "drug_discovery_dossier": {
     "lead_candidate_name": "FEU-EGFR-904",
@@ -8086,6 +8767,8 @@ RETURN mol.chembl_id AS lead_id,
                         </div>
                       </div>
                     </div>
+
+                    <!-- 4. MECHANICS FOOTER -->
                     <div class="snapshot-mechanics-footer med">
                       <strong>⚙️ What Happens in the Engine:</strong> Hybrid Graph-RAG generates the complete discovery dossier with chemical formulas, 3D binding active-site recipes, and preclinical validation metrics with 100% provenance back to underlying PDB crystal coordinates.
                     </div>
